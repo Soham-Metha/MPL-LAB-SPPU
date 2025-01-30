@@ -1,80 +1,45 @@
-%macro read 2        ;standard read
-    MOV rsi, %1
-    MOV rdx, %2
-    MOV rax, 0H
-    MOV rdi, 0H
-    syscall
-%endmacro
+%include 'macros.asm'
 
-%macro write 2        ;standard write
-    MOV rsi, %1
-    MOV rdx, %2
-    MOV rax, 1H
-    MOV rdi, 1H
-    syscall
-%endmacro
-
-%macro exit 0
-    MOV rax, 3CH
-    MOV rdi, 00H
-    syscall
-%endmacro
-
-%macro haa 0        ;hex ascii adjust
-    mov bl,al
-    and bl,0FH
-    cmp bl,09H
-        jl not_alphabet
-    add bl,07H
-    not_alphabet : 
-        add bl,30H
-    mov [rdi],bl
-    inc rdi
-%endmacro
+;------------------------------------------------DATA SECTION-----------------------------------------------------------------
 
 section .data
-    crlf db '',10
 
-    msg1 db "Enter the String:         "
+    msg1     db  "Enter String :            "
     msg1_len equ $-msg1
     
-    msg2 db "The Length of String is : "
+    msg2     db  "Length of String : "
     msg2_len equ $-msg2
 
+;------------------------------------------------ BSS SECTION-----------------------------------------------------------------
+
 section .bss
-    strin resb 10000H
-    len resb 10H
-    global _start
+
+    strin  resb 10000H
+    strlen resb 10H
+
+;------------------------------------------------TEXT SECTION-----------------------------------------------------------------
 
 section .text
+
 _start:
+    println dash_break, dash_break_len
+    print   msg1,       msg1_len
+    read    strin,      10000H
 
-    write msg1, msg1_len
-    write crlf, 1
-    read strin, 10000H
-
-    dec rax
-    mov rdi, len
-    mov rcx, 10H
+    DEC RAX
+    MOV RDI, strlen
+    MOV RCX, [ qword_digit_count ]
 
     over_all_digits:
-        rol rax,04H
-        haa
-        loop over_all_digits
+        ROL RAX, 04H
+        hex_ascii_adjust 
+    LOOP over_all_digits
 
-    mov rcx,10H
-    mov rbx,len
-    discard_zeros:
-        cmp byte[rbx],'0'
-        jnz out_of_loop
-        inc rbx
-        dec rcx
-        jnz discard_zeros
-        
-    out_of_loop:
-        add rcx,1H
-        write msg2, msg2_len
-        write rbx,rcx
-        write crlf,1
+    println dash_break, dash_break_len
+    print   msg2,       msg2_len
 
-    exit
+    MOV     RCX,        [ qword_digit_count ]
+    trim    strlen
+    println RBX,        RCX
+    println dash_break, dash_break_len
+exit

@@ -1,63 +1,50 @@
-%macro read 2        ;standard read
-    MOV rsi, %1
-    MOV rdx, %2
-    MOV rax, 0H
-    MOV rdi, 0H
-    syscall
-%endmacro
+%include 'macros.asm'
 
-%macro write 2        ;standard write
-    MOV rsi, %1
-    MOV rdx, %2
-    MOV rax, 1H
-    MOV rdi, 1H
-    syscall
-%endmacro
-
-%macro exit 0
-    MOV rax, 3CH
-    MOV rdi, 00H
-    syscall
-%endmacro
+;------------------------------------------------DATA SECTION-----------------------------------------------------------------
 
 section .data
-    crlf db '',10
-    msg1 db "Enter the Data : "
+
+    msg1     db  "Enter Data : "
     msg1_len equ $-msg1
-    msg2 db "The Array Data is : "
+    msg2     db  "Array Data : "
     msg2_len equ $-msg2
-    count db 05H
-    numsize dq 11H
+    count    db  05H
+    numsize  dq  11H
+
+;------------------------------------------------ BSS SECTION-----------------------------------------------------------------
 
 section .bss
+
     numarr resb 55H
-    global _start
+
+;------------------------------------------------TEXT SECTION-----------------------------------------------------------------
 
 section .text
+
 _start:
-    MOV rbp,numarr
+    MOV rbp, numarr
+
+    println dash_break, dash_break_len
 
     take_input:
-        write msg1, msg1_len
-        write crlf, 1
-
-        read  rbp, [ numsize ]
-        ADD rbp, [ numsize ]
-
-        DEC byte[ count ]
+        print msg1, msg1_len
+        read  rbp,  [ numsize ]
+        ADD   rbp,  [ numsize ]
+    DEC byte[ count ]
     JNZ take_input
 
-    MOV rbp, numarr
-    MOV byte[ count ],05H
+    println dash_break, dash_break_len
+
+    MOV rbp,           numarr
+    MOV byte[ count ], 05H
 
     print_output:
-        write msg2, msg2_len
-        write crlf, 1
+        print msg2, msg2_len
 
-        write rbp, [ numsize ]
-        ADD rbp, [ numsize ]
-
-        DEC byte[ count ]
+        print rbp, [ numsize ]
+        ADD   rbp, [ numsize ]
+    DEC byte[ count ]
     JNZ print_output
-
-    exit
+    
+    println dash_break, dash_break_len
+exit
