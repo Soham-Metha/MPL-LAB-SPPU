@@ -1,4 +1,4 @@
-%macro read 2        ;standard read
+%macro read 2
     MOV RSI, %1
     MOV RDX, %2
     MOV RAX, 0H
@@ -6,7 +6,7 @@
     syscall
 %endmacro
 
-%macro print 2        ;standard write
+%macro print 2
     MOV RSI, %1
     MOV RDX, %2
     MOV RAX, 1H
@@ -14,56 +14,56 @@
     syscall
 %endmacro
 
-%macro println 2        ;standard write
-    MOV RSI, %1
-    MOV RDX, %2
-    MOV RAX, 1H
-    MOV RDI, 1H
-    syscall
-
-    MOV RSI, crlf
-    MOV RDX, 1H
-    MOV RAX, 1H
-    MOV RDI, 1H
-    syscall
+%macro println 2
+    print %1, %2
+    print crlf, 1H
 %endmacro
 
-%macro hex_ascii_adjust 0        ;hex ascii adjust
+%macro printbr 0-2
+    println dash_break, dash_break_len
+
+    %if %0 == 2
+        print %1, %2
+    %endif
+
+%endmacro
+
+%macro hex_ascii_adjust 0
     MOV BL, AL
     AND BL, 0FH
 
     CMP BL, 09H
     JLE not_alphabet
-        ADD BL, 07H
-    not_alphabet :
-    
-    ADD BL,        30H
-    MOV byte[RDI], BL
-    INC RDI
+    ADD BL, 07H
+
+    not_alphabet:
+        ADD BL,        30H
+        MOV byte[RDI], BL
+        INC RDI
 %endmacro
 
-%macro trim 1         ; string trim
+%macro printtr 2
     MOV RBX, %1
-
+    MOV RCX, %2
+    DEC RCX
+    
     discard_zeros:
         CMP byte[RBX], '0'
-            JNZ break_out_of_loop
-
+        JNZ break_out_of_loop
         INC RBX
-
-    DEC RCX
-    JNZ discard_zeros
+    LOOP discard_zeros
 
     break_out_of_loop:
-    ADD RCX, 1H
+        ADD RCX, 1H
+        println RBX, RCX
 %endmacro
 
 %macro exit 0
+    printbr
     MOV RAX, 3CH
     MOV RDI, 00H
     syscall
 %endmacro
-
 
 section .data
     crlf              db  '',10                                                                   ;10 is the ASCII for new line

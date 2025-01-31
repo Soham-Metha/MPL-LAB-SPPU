@@ -23,28 +23,23 @@ section .text
 
 _start:
     MOV rbp, numarr
-
-    println dash_break, dash_break_len
-
+    printbr
     take_input:
         print msg1, msg1_len
-        read  rbp,  [ numsize ]
-        ADD   rbp,  [ numsize ]
-    DEC byte[ count ]
+        read  rbp,  [numsize]
+        ADD   rbp,  [numsize]
+        DEC   byte[count]
     JNZ take_input
 
-    println dash_break, dash_break_len
+    MOV byte[count], 05H
 
-    MOV rbp,           numarr
-    MOV byte[ count ], 05H
-
+    MOV rbp, numarr
+    printbr
     print_output:
         print msg2, msg2_len
-
-        print rbp, [ numsize ]
-        ADD   rbp, [ numsize ]
-    DEC byte[ count ]
+        print rbp,  [numsize]
+        ADD   rbp,  [numsize]
+        DEC   byte[count]
     JNZ print_output
     
-    println dash_break, dash_break_len
 exit
