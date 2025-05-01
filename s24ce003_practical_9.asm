@@ -69,6 +69,7 @@ opened_successfully:
     mov rsi,buffer
     mov rdx,200
     syscall
+
     CALL display_quad
     mov qword[buf_len],rax
 
@@ -87,6 +88,10 @@ opened_successfully:
 
     call occ
 
+    print charOccurMsg,charOccurMsgLen
+    MOV RAX,ncount
+    CALL display_quad
+    
 exit
 
 display_quad:
