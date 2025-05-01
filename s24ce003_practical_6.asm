@@ -89,7 +89,7 @@ RET
 
 hex_to_ascii_hex:
     MOV RDI, buffer                           ; destination for the ASCII values
-    MOV RCX, 10H                              ; how many times should we loop?
+    MOV RCX, 5                              ; how many times should we loop?
 
     over_all_digits:
         ROL AX, 4H                           ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
