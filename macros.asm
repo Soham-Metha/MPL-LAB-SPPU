@@ -71,3 +71,17 @@ display_quad:
 
     print   buffer, 10H                         ; print result
 RET
+
+find_largest:
+    MOV RBX, [RBP]
+    MOV CL,  5H
+
+    compare_all_numbers:
+        CMP RBX, [RBP]
+        JGE continue
+        MOV RBX, [RBP]
+
+    continue:
+        ADD RBP, 08H
+        LOOP compare_all_numbers
+RET
