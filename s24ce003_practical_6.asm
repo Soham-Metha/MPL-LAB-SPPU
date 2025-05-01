@@ -72,7 +72,7 @@ get_bin_word:
         ROL RAX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         MOV BL, [RSI]
 
-        CMP BL, 09H
+        CMP BL, '9'
         JLE not_alphabet2
         SUB BL, 07H
 
