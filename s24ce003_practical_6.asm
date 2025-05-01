@@ -81,7 +81,7 @@ b2hHanDLer:
 
 invalid:
     print   invalid_msg, invalid_msg_len
-    RET
+    exit
 
 ascii_hex_to_hex:
     MOV     RCX,    4                                   ; how many times should we loop?(digit count)
