@@ -30,7 +30,6 @@ section .text
 
 menustart:
     CALL    display_int
-    ;read    buffer, 10H
     MOV qword[buffer], 0
 _start:
 
