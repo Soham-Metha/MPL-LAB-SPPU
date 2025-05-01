@@ -45,7 +45,7 @@ section .bss
     idt:
         resb 6
     tr:
-        resb 10
+        resb 2
     cr:
         resb 10
     buffer:
