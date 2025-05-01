@@ -43,9 +43,9 @@ section .data
 
 section .bss
     gdt:
-        resb 6
+        resb 10     ; 6 for a 32 bit pc
     idt:
-        resb 6
+        resb 10     ; 6 for a 32 bit pc
     ldt:
         resb 2
     tr:
@@ -61,7 +61,7 @@ section .text
 
 _start:
     SMSW            [cr]
-    MOV     AX,     [cr]
+    MOV     AX,     CR0
     BT      AX,     1
     JC      proc_mode
     print   rmode,  rmodelen
