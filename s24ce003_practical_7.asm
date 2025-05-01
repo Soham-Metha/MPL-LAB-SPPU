@@ -43,17 +43,21 @@ section .data
 
 section .bss
     gdt:
-        resb 10     ; 6 for a 32 bit pc
+        resq 1     ; resd for a 32 bit pc
+    gdtlimit:
+        resw 1
     idt:
-        resb 10     ; 6 for a 32 bit pc
+        resq 1     ; resd for a 32 bit pc
+    idtlimit:
+        resw 1
     ldt:
-        resb 2
+        resw 1
     tr:
-        resb 2
+        resw 1
     cr:
-        resb 4
+        resd 1
     buffer:
-        resb 4
+        resd 1
 
 ;------------------------------------------------TEXT SECTION-----------------------------------------------------------------
 
