@@ -54,7 +54,7 @@ _start:
     mov qword[fd],rax
 
     BT rax,63
-    jc opened_successfully
+    jnc opened_successfully
 
     print errorMsg,errorMsgLen
     exit
