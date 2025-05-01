@@ -67,20 +67,20 @@ get_bin_word:
     MOV RSI, Input
     MOV RCX, 4                                ; how many times should we loop?(digit count)
 
-    %%over_all_digits:
+    over_all_digits2:
         SHL RAX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         MOV BL, [RSI]
         AND BL, 0FH
 
         CMP BL, 09H
-        JLE %%not_alphabet
+        JLE not_alphabet2
         SUB BL, 07H
 
-        %%not_alphabet:
+        not_alphabet2:
             SUB BL, 30H
             OR  AL, BL
             INC RSI
-    LOOP %%over_all_digits
+    LOOP over_all_digits2
 
 RET
 
@@ -88,10 +88,10 @@ display_quad:
     MOV RDI, buffer                           ; destination for the ASCII values
     MOV RCX, 10H                              ; how many times should we loop?
 
-    %%over_all_digits:
+    over_all_digits:
         ROL RAX, 4H                           ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
-    LOOP %%over_all_digits
+    LOOP over_all_digits
 
     print   buffer, 10H                         ; print result
 RET
