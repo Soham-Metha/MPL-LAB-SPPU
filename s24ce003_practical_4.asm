@@ -1,6 +1,10 @@
 %include 'macros.asm'
 
 section .data
+
+    num1  dq  20H
+    num2  dq  10H
+
     menu_msg:
         db  0x0A,0x0A
         db  "-------------------",0x0A
@@ -15,11 +19,9 @@ section .data
 
     menu_msg_len: equ $-menu_msg
 
-    result_message      db  "Result : "
-    result_message_len  equ $-result_message
-
-    num1  dq  20H
-    num2  dq  10H
+    result_message:
+        db  "Result : "
+    result_message_len:  equ $-result_message
 
 section .bss
 
@@ -29,14 +31,17 @@ section .bss
 section .text
 
 menustart:
-    CALL    display_int
+    CALL    display_int                             ; prints result stored in AX
 _start:
 
-    print   menu_msg, menu_msg_len
-    read    choice,   2
+    print   menu_msg, menu_msg_len                  ; print menu
+    read    choice,   2                             ; read 2 characters, 1st is user choice and 2nd is the enter key
 
-    CMP byte[choice], '7'
-    JGE end
+    CMP byte[choice], '7'                           ; user has only 6 options, 1 to 6
+    JGE end                                         ; if user enters some other option, exit
+
+    CMP byte[choice], '0'                           ; 0 is not a valid choice
+    JE  end
 
     print result_message, result_message_len
 
