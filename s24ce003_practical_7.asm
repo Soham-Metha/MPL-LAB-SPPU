@@ -84,8 +84,8 @@ proc_mode:
 
 ;-----------LOAD ALL-------------
     SGDT    [gdtlimit]
-    SLDT    [ldtlimit]
-    SIDT    [idt]
+    SIDT    [idtlimit]
+    SLDT    [ldt]
     STR     [tr]
 
 ;-------------GDT----------------
