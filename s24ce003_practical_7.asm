@@ -76,8 +76,6 @@ proc_mode:
     CALL display_int
 
 ;-----------LOAD ALL-------------
-    sidt [idt]
-    str [tr]
 
 ;-------------GDT----------------
     print gcon,gconlen
@@ -98,6 +96,7 @@ proc_mode:
 
 ;-------------IDT----------------
     print icon,iconlen
+    sidt [idt]
     mov AX, [idt+4]
     CALL display_int
     mov AX, [idt+2]
@@ -107,6 +106,7 @@ proc_mode:
 
 ;--------------TR-----------------
     print tcon,tconlen
+    str [tr]
     mov AX, [tr]
     CALL display_int
 exit
