@@ -35,7 +35,7 @@ section .bss
 section .text
 
 menustart:
-    print output,5
+    print   buffer, 10H                         ; print result
 _start:
     print menu_msg,menu_msg_len
     read choice, 2
@@ -94,13 +94,12 @@ hex_to_ascii_hex:
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
-    print   buffer, 10H                         ; print result
 RET
 
 hex_to_bcd:
     mov ebx, 10
     mov ecx, 5
-    mov edi, output+4
+    mov edi, buffer+0FH
 .bcd_loop:
     xor edx, edx
     div ebx
