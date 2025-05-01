@@ -3,7 +3,7 @@
 section .data
 
 
-section .BSS
+section .bss
 
 
 section .text
