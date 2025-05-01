@@ -70,7 +70,6 @@ opened_successfully:
     mov rdx,200
     syscall
 
-    ;CALL display_quad
     mov qword[buf_len],rax
 
     ;print spaceMsg,spaceMsgLen
@@ -85,7 +84,6 @@ opened_successfully:
     ;read cha,2
 
     mov bl, 'l'
-
     call occ
 
     print charOccurMsg,charOccurMsgLen
