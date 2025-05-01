@@ -23,14 +23,13 @@ section .data
 
 section .bss
 
-    choice resb 1
+    choice resb 01H
     buffer resb 10H
 
 section .text
 
 menustart:
     CALL    display_int
-    MOV qword[buffer], 0
 _start:
 
     print   menu_msg, menu_msg_len
