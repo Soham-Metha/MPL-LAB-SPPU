@@ -65,12 +65,12 @@ ret
 
 display_word:
     MOV RDI, pbuffer                           ; destination for the ASCII values
-    MOV RCX, 08H                              ; how many times should we loop?
+    MOV RCX, 04H                              ; how many times should we loop?
 
     over_all_digits:
         ROL AX, 4H                           ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
-    print pbuffer, 08H                         ; print result
+    print pbuffer, 04H                         ; print result
 RET
