@@ -79,8 +79,7 @@ proc_mode:
     CALL    display_int
 
 ;-------------GDT----------------
-    SGDT    ebx
-    MOV     [gdt],  EBX
+    SGDT    [gdt]
     print   gcon,   gconlen
     MOV     AX,     [gdt+4]
     CALL    display_int
