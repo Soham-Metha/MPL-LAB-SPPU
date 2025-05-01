@@ -102,8 +102,8 @@ hex_to_ascii_hex:
     not_alphabet:
         ADD BL,     '0'
         MOV [EDI],  BL
-        DEC EDI
         ROL AX,     4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
+        DEC EDI
     LOOP over_all_digits
 RET
 
