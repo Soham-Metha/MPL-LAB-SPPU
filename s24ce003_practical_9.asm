@@ -6,55 +6,54 @@ section .data
     openedMsg:
         db "File opened successfully",0x0A
         db "Enter character : "
-    openedMsgLen equ $-openedMsg
+    openedMsgLen: equ $-openedMsg
 
-    errorMsg db "Error in opening file"
-    errorMsgLen equ $-errorMsg
+    errorMsg:
+        db "Error in opening file"
+    errorMsgLen: equ $-errorMsg
 
 section .bss
     global buf_len,buffer,cha
 
-    fd      resb 17
-    cha     resb 2
-    buffer  resb 200
-    buf_len resb 16
-
-
+    fd      resb 10H
+    cha     resb 2H
+    buffer  resb 100H
+    buf_len resb 10H
 
 section .text
     extern spaces,enters,char
 
 _start:
 
-    mov rax,2
-    mov rdi,fname
-    mov rsi,2
-    mov rdx,0777
+    mov     rax,            2
+    mov     rdi,            fname
+    mov     rsi,            2
+    mov     rdx,            777
     syscall
 
-    mov qword[fd],rax
+    mov     qword[fd],      rax
 
-    BT rax,63
-    jnc opened_successfully
+    BT      rax,            63
+    jnc     opened_successfully
 
-    print errorMsg,errorMsgLen
+    print   errorMsg,       errorMsgLen
     exit
 
 opened_successfully:
 
-    print openedMsg,openedMsgLen
-    read cha,2
+    print   openedMsg,      openedMsgLen
+    read    cha,            2
 
-    mov rax,0
-    mov rdi,[fd]
-    mov rsi,buffer
-    mov rdx,200
+    mov     rax,            0
+    mov     rdi,            [fd]
+    mov     rsi,            buffer
+    mov     rdx,            200
     syscall
 
-    mov qword[buf_len],rax
-    print buffer,buf_len
-    call spaces
-    call enters
-    call char
+    mov     qword[buf_len], rax
+    print   buffer,         buf_len
+    call    spaces
+    call    enters
+    call    char
 
 exit
