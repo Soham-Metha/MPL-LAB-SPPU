@@ -43,7 +43,7 @@ section .data
 
 section .bss
     gdt:
-        resb 10
+        resb 6
     idt:
         resb 6
     ldt:
