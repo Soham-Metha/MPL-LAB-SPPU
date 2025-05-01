@@ -59,8 +59,8 @@ end:
     exit
 
 h2bHandler:
-    get_bin_word
-    display_quad
+    CALL get_bin_word
+    CALL display_quad
 
 get_bin_word:
     XOR RAX, RAX
