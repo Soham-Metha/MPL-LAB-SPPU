@@ -60,7 +60,11 @@ end:
 
 h2bHandler:
 b2hHandler:
+    MOV EBX,dword[input]
     CALL get_bin_word
+    CALL display_quad
+    MOV RAX, 0
+    MOV EAX, EBX
     CALL display_quad
 
 get_bin_word:
