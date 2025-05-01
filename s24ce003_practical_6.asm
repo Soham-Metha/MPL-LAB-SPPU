@@ -61,8 +61,7 @@ end:
 h2bHandler:
 b2hHandler:
     CALL ascii_hex_to_hex
-    AAM
-    CALL hex_to_ascii_hex
+    CALL hex_to_bcd
 
 ascii_hex_to_hex:
     MOV RAX, 0
@@ -96,3 +95,16 @@ hex_to_ascii_hex:
 
     print   buffer, 10H                         ; print result
 RET
+
+hex_to_bcd:
+    mov ebx, 10
+    mov ecx, 5
+    mov edi, output+4
+.bcd_loop:
+    xor edx, edx
+    div ebx
+    add dl, '0'
+    mov [edi], dl
+    dec edi
+    loop .bcd_loop
+    ret
