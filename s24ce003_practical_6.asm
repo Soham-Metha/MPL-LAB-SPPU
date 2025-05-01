@@ -82,7 +82,7 @@ invalid:
     exit
 
 ascii_hex_to_hex:
-    MOV     RCX,    [inputLen]-1                                   ; how many times should we loop?(digit count)
+    MOV     RCX,    [inputLen]                                   ; how many times should we loop?(digit count)
 
     over_all_digits2:
         ROL AX,     4                                   ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
@@ -101,7 +101,7 @@ ascii_hex_to_hex:
 RET
 
 hex_to_ascii_hex:
-    MOV     RCX,    [inputLen]-1                                   ; how many times should we loop?(digit count)
+    MOV     RCX,    [inputLen]                                   ; how many times should we loop?(digit count)
 
     over_all_digits:
         MOV BL,     AL
@@ -120,7 +120,7 @@ RET
 
 hex_to_bcd:
     MOV     EBX,    10
-    MOV     ECX,    [inputLen]-1
+    MOV     ECX,    [inputLen]
 .bcd_loop:
     XOR     EDX,    EDX
     DIV     EBX
@@ -132,7 +132,7 @@ hex_to_bcd:
 
 bcd_to_hex:
     MOV     EBX,    10
-    MOV     ECX,    [inputLen]-1
+    MOV     ECX,    [inputLen]
 .num_loop:
     IMUL    EBX
     MOV     DL,     [ESI]
