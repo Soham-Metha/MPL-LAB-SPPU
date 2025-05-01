@@ -39,15 +39,15 @@ section .data
 
 section .bss
     gdt:
-        resw 3
+        resq 3
     ldt:
-        resw 1
+        resq 1
     idt:
-        resw 3
+        resq 3
     tr:
-        resw 1
+        resq 1
     cr:
-        resw 2
+        resq 2
     buffer:
         resb 4
 
@@ -58,7 +58,7 @@ _start:
     mov rax,[cr]
 
     bt rax,1
-    jc proc_mode    
+    jc proc_mode
 
     print rmode,rmodelen
 exit
