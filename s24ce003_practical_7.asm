@@ -78,8 +78,13 @@ proc_mode:
     MOV     AX,     [cr]
     CALL    display_word
 
-;-------------GDT----------------
+;-----------LOAD ALL-------------
     SGDT    [gdt]
+    SLDT    [ldt]
+    SIDT    [idt]
+    STR     [tr]
+
+;-------------GDT----------------
     print   gcon,   gconlen
     MOV     AX,     [gdt+4]
     CALL    display_word
@@ -90,7 +95,6 @@ proc_mode:
     CALL    display_word
 
 ;-------------IDT----------------
-    SIDT    [idt]
     print   icon,   iconlen
     MOV     AX,     [idt+4]
     CALL    display_word
@@ -101,13 +105,11 @@ proc_mode:
     CALL    display_word
 
 ;-------------LDT----------------
-    SLDT    [ldt]
     print   lcon,   lconlen
     MOV     AX,     [ldt]
     CALL    display_word
 
 ;--------------TR-----------------
-    STR     [tr]
     print   tcon,   tconlen
     MOV     AX,     [tr]
     CALL    display_word
