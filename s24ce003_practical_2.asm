@@ -30,13 +30,13 @@ _start:
     read    strin, 100H
 
     DEC     RAX
-    CALL    display_int
+    CALL    display_quad
 
 exit
 
 ;-----------------------------------------------------------------------------------------------------------------------------
 
-display_int:
+display_quad:
     MOV RDI, buffer                           ; destination for the ASCII values
     MOV RCX, 10H                              ; how many times should we loop?
 
