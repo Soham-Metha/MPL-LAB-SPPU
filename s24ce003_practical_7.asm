@@ -100,12 +100,12 @@ proc_mode:
 
 ;-------------IDT----------------
     print   icon,   iconlen
-    MOV     AX,     [idt+4]
-    CALL    display_word
     MOV     AX,     [idt+2]
     CALL    display_word
-    print   col,    collen
     MOV     AX,     [idt]
+    CALL    display_word
+    print   col,    collen
+    MOV     AX,     [idtlimit]
     CALL    display_word
 
 ;-------------LDT----------------
