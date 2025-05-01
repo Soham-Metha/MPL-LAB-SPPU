@@ -70,7 +70,7 @@ opened_successfully:
     mov rdx,200
     syscall
 
-    CALL display_quad
+    ;CALL display_quad
     mov qword[buf_len],rax
 
     ;print spaceMsg,spaceMsgLen
