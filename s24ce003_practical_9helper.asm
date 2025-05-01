@@ -50,14 +50,14 @@ RET
 occr:
     mov rsi,buffer
     mov RCX,qword[buf_len]
-    up3:
+    up:
         mov al, byte[rsi]
         cmp al, bl
         jne continue
         inc byte[count]
     continue:
         inc     rsi
-        loop    up3
+        loop    up
 
     MOV RAX,[count]
     CALL display_quad
