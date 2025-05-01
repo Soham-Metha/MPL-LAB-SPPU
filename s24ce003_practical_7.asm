@@ -57,7 +57,7 @@ _start:
     smsw [cr]
     mov rax,[cr]
 
-    bt al,1
+    bt rax,1
     jc proc_mode    
 
     print rmode,rmodelen
