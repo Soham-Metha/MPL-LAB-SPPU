@@ -16,8 +16,10 @@ section .data
 
 section .bss
 
-    strin  resb 100H
-    buffer resb 10H
+    strin:
+        resb 100H
+    buffer:
+        resb 10H
 
 ;------------------------------------------------TEXT SECTION-----------------------------------------------------------------
 
@@ -44,5 +46,5 @@ display_int:
     LOOP over_all_digits
 
     print   msg2,  msg2_len
-    print buffer, 10H                         ; print result
+    print   buffer, 10H                         ; print result
 RET

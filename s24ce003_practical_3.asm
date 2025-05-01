@@ -4,21 +4,31 @@
 
 section .data
 
-    msg1     db  "Largest Number : "
+    msg1:
+        db  "Largest Number : "
     msg1_len equ $-msg1
-    msg2     db  "Array Data : "
+
+    msg2:
+        db  0x0A
+        db  "Array Data : "
     msg2_len equ $-msg2
 
-    numarr dq 2H,9H,5H,3H,6H                  ; actual content of array
-    cnt    dq 05H                             ; count of numbers in array
+    numarr:
+        dq 2H
+        dq 9H
+        dq 5H
+        dq 3H
+        dq 6H                               ; actual content of array
 
-    qword_byte_count dq 08H                   ; bytes assigned to each number
+    cnt:
+       db 05H                               ; count of numbers in array
 
 ;------------------------------------------------ BSS SECTION-----------------------------------------------------------------
 
 section .bss
 
-    buffer resb 10H                           ; reserve buffer for the ASCII adjust
+    buffer:
+        resb 10H                           ; reserve buffer for the ASCII adjust
 
 ;------------------------------------------------TEXT SECTION-----------------------------------------------------------------
 
@@ -28,47 +38,47 @@ _start:
     MOV     RBP,  numarr
     CALL    find_largest
 
-    printbr msg1, msg1_len
+    print   msg1, msg1_len
     MOV     RAX,  RBX                         ; load largest number in RAX
     CALL    display_int
     
+    print msg2, msg2_len
+
     MOV     RBP,  numarr                      ; reset rbp
-
-    printbr 
-    println msg2, msg2_len
-
     print_arr:
-        MOV  RAX, [RBP]                       ; load current number in RAX
-        CALL display_int
-        ADD  RBP, [qword_byte_count]
-        DEC  byte[cnt]
+        print   crlf,   1
+        MOV     RAX,    [RBP]                 ; load current number in RAX
+        CALL    display_int
+        ADD     RBP,    08H
+        DEC     byte[cnt]
     JNZ print_arr
+
 exit
 
 ;------------------------------------------------DEFN SECTION-----------------------------------------------------------------
 
 find_largest:
     MOV RBX, [RBP]
-    MOV RCX, [cnt]
+    MOV RCX, 5H
 
-    compare_all_digits:
+    compare_all_numbers:
         CMP RBX, [RBP]
-        JGE continue_to_next_iteration
+        JGE continue
         MOV RBX, [RBP]
 
-    continue_to_next_iteration:
-        ADD RBP, [qword_byte_count]
-    LOOP compare_all_digits
+    continue:
+        ADD RBP, 08H
+        LOOP compare_all_numbers
 RET
 
 display_int:
     MOV RDI, buffer                           ; destination for the ASCII values
-    MOV RCX, [qword_digit_count]              ; how many times should we loop?
+    MOV RCX, 10H                              ; how many times should we loop?
 
     over_all_digits:
         ROL RAX, 4H                           ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
-    printtr buffer, [qword_digit_count]       ; trim the leading '0's from buffer, and print result
+    print buffer, 10H                         ; print result
 RET
