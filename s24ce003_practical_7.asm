@@ -76,7 +76,6 @@ proc_mode:
     CALL display_int
 
 ;-----------LOAD ALL-------------
-    sldt [ldt]
     sidt [idt]
     str [tr]
 
@@ -93,6 +92,7 @@ proc_mode:
 
 ;-------------LDT----------------
     print lcon,lconlen
+    sldt [ldt]
     mov AX, [ldt]
     CALL display_int
 
