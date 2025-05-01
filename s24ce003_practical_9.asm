@@ -32,7 +32,7 @@ section .data
 section .bss
     global buf_len,buffer,scount,ncount,ccount,chacount,charOccurMsg,charOccurMsgLen
 
-    fd      resb 16
+    fd      resb 17
     buffer  resb 200
     buf_len resb 16
 
