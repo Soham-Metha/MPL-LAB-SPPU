@@ -69,7 +69,6 @@ proc_mode:
     print pmode,pmodelen
 
 ;-------------CR0----------------
-    print cro,crolen
     mov rax,[cr+2]
     CALL display_int
 
