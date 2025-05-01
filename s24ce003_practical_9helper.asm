@@ -1,7 +1,7 @@
 %include 'macros.asm'
 
 section .data
-    extern charOccurMsg,charOccurMsgLen,chacount
+    extern charOccurMsg,charOccurMsgLen
 
     spaceMsg db "Spaces:"
     spaceMsgLen equ $-spaceMsg
@@ -11,6 +11,8 @@ section .data
 
     charOccurMsg db "No of occurrences:"
     charOccurMsgLen equ $-charOccurMsg
+
+    count: db 0
 
 section .bss
     pbuffer resb 10H
@@ -42,12 +44,12 @@ occr:
         mov al, byte[rsi]
         cmp al, bl
         jne continue
-        inc byte[chacount]
+        inc byte[count]
     continue:
         inc     rsi
         loop    up3
 
-    MOV RAX,[chacount]
+    MOV RAX,[count]
     CALL display_quad
 ret
 
@@ -60,5 +62,5 @@ display_quad:
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
-    print   buffer, 10H                         ; print result
+    print buffer, 10H                         ; print result
 RET
