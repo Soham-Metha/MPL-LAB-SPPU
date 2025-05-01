@@ -119,10 +119,11 @@ hex_to_ascii_hex:
 RET
 
 hex_to_bcd:
+    MOV     EBX,    10
     MOV     ECX,    [inputLen]
 .bcd_loop:
     XOR     EDX,    EDX
-    DIV     EAX,    10
+    DIV     EBX
     ADD     DL,     '0'
     MOV     [EDI],  DL
     DEC     EDI
@@ -130,9 +131,10 @@ hex_to_bcd:
     RET
 
 bcd_to_hex:
+    MOV     EBX,    10
     MOV     ECX,    [inputLen]
 .num_loop:
-    MUL     EAX,    10
+    MUL    EAX,    EBX
     MOV     DL,     [ESI]
     SUB     DL,     '0'
     ADD     EAX,    EDX
