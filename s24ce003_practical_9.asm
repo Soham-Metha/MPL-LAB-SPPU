@@ -40,10 +40,10 @@ section .bss
 
 
 section .text
+    extern occ
 
 _start:
 
-    extern occ
 
     mov rax,2
     mov rdi,fname
