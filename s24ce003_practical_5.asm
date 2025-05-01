@@ -51,11 +51,11 @@ _start:
 
     print   msg1, msg1_len
     MOV     RAX,  [pos_cnt]
-    CALL    display_int
+    CALL    display_quad
 
     print   msg2, msg2_len
     MOV     RAX,  [neg_cnt]
-    CALL    display_int
+    CALL    display_quad
 
     print   msg0, msg0_len
 
@@ -63,7 +63,7 @@ _start:
     print_arr:
         print   crlf,   1
         MOV     RAX,    [RBP]                 ; load current number in RAX
-        CALL    display_int
+        CALL    display_quad
         ADD     RBP,    08H
         DEC     byte[cnt]
     JNZ print_arr
