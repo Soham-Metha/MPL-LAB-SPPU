@@ -59,12 +59,13 @@ end:
     exit
 
 h2bHandler:
+b2hHandler:
     CALL get_bin_word
     CALL display_quad
 
 get_bin_word:
     XOR RAX, RAX
-    MOV RSI, Input
+    MOV RSI, input
     MOV RCX, 4                                ; how many times should we loop?(digit count)
 
     over_all_digits2:
