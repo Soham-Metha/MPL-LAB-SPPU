@@ -101,7 +101,7 @@ ascii_hex_to_hex:
 RET
 
 hex_to_ascii_hex:
-    MOV     RCX,    [inputLen]                                   ; how many times should we loop?(digit count)
+    MOV     RCX,    4                                   ; how many times should we loop?(digit count)
 
     over_all_digits:
         MOV BL,     AL
