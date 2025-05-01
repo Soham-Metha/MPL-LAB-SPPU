@@ -32,7 +32,7 @@ section .data
     
     tcon:
         db 0x0A
-        db "TR : "
+        db "TR  : "
     tconlen equ $-tcon
     
     col:
@@ -103,6 +103,7 @@ proc_mode:
     CALL display_int
     mov AX, [idt+2]
     CALL display_int
+    print col,collen
     mov AX, [idt]
     CALL display_int
 
