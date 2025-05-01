@@ -5,14 +5,17 @@
 section .data
 
     msg0:
+        db  0x0A
         db  "Array Data : "
     msg0_len equ $-msg0
 
     msg1:
+        db  0x0A
         db  "Positive number count : "
     msg1_len equ $-msg1
 
     msg2:
+        db  0x0A
         db  "Negative number count : "
     msg2_len equ $-msg2
 
