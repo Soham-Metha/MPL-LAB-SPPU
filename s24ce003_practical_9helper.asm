@@ -32,17 +32,20 @@ spaces:
     mov bl,' '
     CALL occr
     MOV  byte[count],0
+RET
 enters:
     print nlMsg,nlMsgLen
     mov bl,0x0A
     CALL occr
     MOV  byte[count],0
+RET
 
 char:
     print charOccurMsg,charOccurMsgLen
     mov bl,byte[cha]
     CALL occr
     MOV  byte[count],0
+RET
 
 occr:
     mov rsi,buffer
