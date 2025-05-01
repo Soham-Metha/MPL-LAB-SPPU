@@ -14,26 +14,27 @@ section .data
 
 section .bss
 
-    strin    resb 10000H
-    strinlen resb 10000H
+    strin  resb 100H
+    buffer resb 10H
 
 ;------------------------------------------------TEXT SECTION-----------------------------------------------------------------
 
 section .text
 
 _start:
-    printbr msg1,  msg1_len
-    read    strin, 10000H
-
+    print   msg1,  msg1_len
+    read    strin, 100H
+    print   msg2,  msg2_len
     DEC     RAX
-    MOV     RDI,   strinlen
-    MOV     RCX,   [qword_digit_count]
+
+    MOV     RDI,   buffer
+    MOV     RCX,   10H
 
     over_all_digits:
         ROL RAX,   04H
-        hex_ascii_adjust 
+        hex_ascii_adjust
     LOOP over_all_digits
 
-    printbr msg2,     msg2_len
-    printtr strinlen, [qword_digit_count]
+    print buffer, 10H
+
 exit
