@@ -2,7 +2,8 @@
 
 section .data
     menu_msg:
-        db  0x0A,"-------------------"0x0A
+        db  0x0A,
+        db  "-------------------"0x0A
         db  "1. Addition        ",0x0A
         db  "2. Subtraction     ",0x0A
         db  "3. Multiplication  ",0x0A
@@ -29,6 +30,7 @@ section .text
 
 menustart:
     CALL    display_int
+    read    buffer, 10H
     MOV qword[buffer], 0
 _start:
 
