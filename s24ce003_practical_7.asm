@@ -83,8 +83,8 @@ proc_mode:
     CALL    display_word
 
 ;-----------LOAD ALL-------------
-    SGDT    [gdt]
-    SLDT    [ldt]
+    SGDT    [gdtlimit]
+    SLDT    [ldtlimit]
     SIDT    [idt]
     STR     [tr]
 
