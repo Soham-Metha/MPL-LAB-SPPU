@@ -81,10 +81,10 @@ opened_successfully:
 
     ;call enters
 
-    print charInMsg,charInMsgLen
-    read cha,2
+    ;print charInMsg,charInMsgLen
+    ;read cha,2
 
-    mov bl, byte[cha]
+    mov bl, ' '
 
     call occ
 
