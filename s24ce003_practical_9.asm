@@ -48,7 +48,7 @@ _start:
     mov rax,2
     mov rdi,fname
     mov rsi,2
-    mov rdx,777
+    mov rdx,0777
     syscall
 
     mov qword[fd],rax
