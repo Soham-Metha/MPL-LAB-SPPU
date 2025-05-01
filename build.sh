@@ -16,7 +16,7 @@ fi
 ld $prefix$1.o -o $prefix$1.out &&
 
 #run executable
-./$prefix$1.out &&
+./$prefix$1.out
 
 #clean the trash
-rm $prefix$1.out $prefix$1.o
+#rm $prefix$1.out $prefix$1.o
