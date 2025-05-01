@@ -18,7 +18,7 @@ section .data
         db "No of occurrences:"
     charOccurMsgLen equ $-charOccurMsg
 
-    count: dq 0
+    count: dw 0
 
 section .bss
     pbuffer resb 10H
@@ -60,17 +60,17 @@ occr:
         loop    up
 
     MOV RAX,[count]
-    CALL display_quad
+    CALL display_word
 ret
 
-display_quad:
+display_word:
     MOV RDI, pbuffer                           ; destination for the ASCII values
-    MOV RCX, 10H                              ; how many times should we loop?
+    MOV RCX, 08H                              ; how many times should we loop?
 
     over_all_digits:
         ROL RAX, 4H                           ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
-    print pbuffer, 10H                         ; print result
+    print pbuffer, 08H                         ; print result
 RET
