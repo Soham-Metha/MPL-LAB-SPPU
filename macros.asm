@@ -69,6 +69,5 @@ display_quad:
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
-    print   msg2,  msg2_len
     print   buffer, 10H                         ; print result
 RET
