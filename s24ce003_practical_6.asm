@@ -95,7 +95,7 @@ hex_to_ascii_hex:
 
     over_all_digits:
         ROL AX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
-        MOV BL, [RSI]
+        MOV BL, AL
 
         CMP BL, 09H
         JBE not_alphabet
@@ -103,8 +103,8 @@ hex_to_ascii_hex:
 
         not_alphabet:
             ADD BL, '0'
-            OR  AL, BL
-            INC RSI
+            MOV [RDI], BL
+            DEC RDI
     LOOP over_all_digits
 RET
 
