@@ -11,6 +11,7 @@ section .text
     global occ
 
 occ:
+    print charOccurMsg,charOccurMsgLen
     mov rsi,buffer
     mov RCX,qword[buf_len]
     up3:
