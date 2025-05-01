@@ -60,9 +60,9 @@ section .bss
 section .text
 
 _start:
-    SMSW            [cr]
-    MOV     EAX,     CR0
-    BT      EAX,     1
+    SMSW    [cr]
+    MOV     AX,     [cr]
+    BT      AX,     1
     JC      proc_mode
     print   rmode,  rmodelen
     exit
