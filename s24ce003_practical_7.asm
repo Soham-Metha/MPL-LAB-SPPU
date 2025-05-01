@@ -43,7 +43,7 @@ section .bss
     ldt:
         resb 2
     idt:
-        resb 10
+        resb 6
     tr:
         resb 10
     cr:
