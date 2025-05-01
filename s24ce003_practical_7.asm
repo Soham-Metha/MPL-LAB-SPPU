@@ -45,11 +45,11 @@ section .bss
     gdtlimit:
         resw 1
     gdt:
-        resq 1     ; resd for a 32 bit pc
+        resd 1     ; resd for a 32 bit pc
     idtlimit:
         resw 1
     idt:
-        resq 1     ; resd for a 32 bit pc
+        resd 1     ; resd for a 32 bit pc
     ldt:
         resw 1
     tr:
