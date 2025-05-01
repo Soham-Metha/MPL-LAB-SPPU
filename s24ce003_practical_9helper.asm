@@ -4,7 +4,6 @@ section .data
     extern charOccurMsg,charOccurMsgLen
 
     spaceMsg:
-        db 0x0A
         db "Spaces            : "
     spaceMsgLen equ $-spaceMsg
 

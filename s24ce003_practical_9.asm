@@ -3,17 +3,13 @@
 section .data
     fname db 'text.txt',0
 
-    openedSuccessfullyMsg db "File opened successfully"
-    openedSuccessfullyMsgLen equ $-openedSuccessfullyMsg
-
-    closedSuccessfullyMsg db "File closed successfully"
-    closedSuccessfullyMsgLen equ $-closedSuccessfullyMsg
+    openedMsg:
+        db "File opened successfully",0x0A
+        db "Enter character : "
+    openedMsgLen equ $-openedMsg
 
     errorMsg db "Error in opening file"
     errorMsgLen equ $-errorMsg
-
-    charInMsg db "Enter character"
-    charInMsgLen equ $-charInMsg
 
 section .bss
     global buf_len,buffer,cha
@@ -46,7 +42,8 @@ _start:
 
 opened_successfully:
 
-    print openedSuccessfullyMsg,openedSuccessfullyMsgLen
+    print openedMsg,openedMsgLen
+    read cha,2
 
     mov rax,0
     mov rdi,[fd]
@@ -55,10 +52,6 @@ opened_successfully:
     syscall
 
     mov qword[buf_len],rax
-
-    print charInMsg,charInMsgLen
-    read cha,2
-    XOR RAX, RAX
     call spaces
     call enters
     call char
