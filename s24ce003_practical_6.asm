@@ -35,7 +35,7 @@ section .bss
 section .text
 
 menustart:
-    print   buffer, 10H                         ; print result
+    print   buffer, 8                         ; print result
 _start:
     print menu_msg,menu_msg_len
     read choice, 2
@@ -98,8 +98,8 @@ RET
 
 hex_to_bcd:
     mov ebx, 10
-    mov ecx, 10H
-    mov edi, buffer+0FH
+    mov ecx, 5
+    mov edi, buffer+4
 .bcd_loop:
     xor edx, edx
     div ebx
