@@ -42,14 +42,14 @@ section .data
 ;------------------------------------------------ BSS SECTION-----------------------------------------------------------------
 
 section .bss
-    gdt:
-        resq 1     ; resd for a 32 bit pc
     gdtlimit:
         resw 1
-    idt:
+    gdt:
         resq 1     ; resd for a 32 bit pc
     idtlimit:
         resw 1
+    idt:
+        resq 1     ; resd for a 32 bit pc
     ldt:
         resw 1
     tr:
@@ -90,7 +90,7 @@ proc_mode:
 
 ;-------------GDT----------------
     print   gcon,   gconlen
-    MOV     AX,     [gdt+4]
+    MOV     AX,     [gdtlimit]
     CALL    display_word
     MOV     AX,     [gdt+2]
     CALL    display_word
