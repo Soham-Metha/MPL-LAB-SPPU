@@ -70,7 +70,7 @@ exit
 ;------------------------------------------------DEFN SECTION-----------------------------------------------------------------
 
 get_count:
-    MOV CL, 5H
+    MOV RCX, 5H
 
     compare_all_numbers:
         CMP qword[RBP], 0H
