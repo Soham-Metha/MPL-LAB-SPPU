@@ -58,7 +58,7 @@ opened_successfully:
 
     print charInMsg,charInMsgLen
     read cha,2
-
+    XOR RAX, RAX
     call spaces
     call enters
     call char
