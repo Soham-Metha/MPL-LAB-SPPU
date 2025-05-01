@@ -13,13 +13,12 @@ section .text
 occ:
     print charOccurMsg,charOccurMsgLen
     mov rsi,buffer
-    print charOccurMsg,charOccurMsgLen
     mov RCX,qword[buf_len]
-    print charOccurMsg,charOccurMsgLen
     up3:
         mov al, byte[rsi]
         cmp al, bl
         jne continue_up_occ
+    print charOccurMsg,charOccurMsgLen
         inc byte[chacount]
     continue_up_occ:
         inc     rsi
