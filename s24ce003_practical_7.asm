@@ -76,10 +76,13 @@ proc_mode:
     CALL display_int
 
 ;-----------LOAD ALL-------------
+    sgdt [gdt]
+    sldt [ldt]
+    sidt [idt]
+    str [tr]
 
 ;-------------GDT----------------
     print gcon,gconlen
-    sgdt [gdt]
     mov AX, [gdt+4]
     CALL display_int
     mov AX, [gdt+2]
@@ -90,24 +93,20 @@ proc_mode:
 
 ;-------------LDT----------------
     print lcon,lconlen
-    sldt [ldt]
     mov AX, [ldt]
     CALL display_int
 
 ;-------------IDT----------------
     print icon,iconlen
-    sidt [idt]
     mov AX, [idt+4]
     CALL display_int
     mov AX, [idt+2]
     CALL display_int
-    print col,collen
     mov AX, [idt]
     CALL display_int
 
 ;--------------TR-----------------
     print tcon,tconlen
-    str [tr]
     mov AX, [tr]
     CALL display_int
 exit
