@@ -61,7 +61,7 @@ end:
 h2bHandler:
 b2hHandler:
     CALL ascii_hex_to_hex
-    AAA
+    AAM
     CALL hex_to_ascii_hex
 
 ascii_hex_to_hex:
