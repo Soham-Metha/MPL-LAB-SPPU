@@ -55,9 +55,9 @@ section .text
 
 _start:
     smsw [cr]
-    mov rax,[cr]
+    mov AX,[cr]
 
-    bt rax,1
+    bt AX,1
     jc proc_mode
 
     print rmode,rmodelen
@@ -69,10 +69,10 @@ proc_mode:
     print pmode,pmodelen
 
 ;-------------CR0----------------
-    mov rax,[cr+2]
+    mov AX,[cr+2]
     CALL display_int
 
-    mov rax,[cr]
+    mov AX,[cr]
     CALL display_int
 
 ;-----------LOAD ALL-------------
@@ -83,31 +83,31 @@ proc_mode:
 
 ;-------------GDT----------------
     print gcon,gconlen
-    mov rax, [gdt+4]
+    mov AX, [gdt+4]
     CALL display_int
-    mov rax, [gdt+2]
+    mov AX, [gdt+2]
     CALL display_int
     print col,collen
-    mov rax, [gdt]
+    mov AX, [gdt]
     CALL display_int
 
 ;-------------LDT----------------
     print lcon,lconlen
-    mov rax, [ldt]
+    mov AX, [ldt]
     CALL display_int
 
 ;-------------IDT----------------
     print icon,iconlen
-    mov rax, [idt+4]
+    mov AX, [idt+4]
     CALL display_int
-    mov rax, [idt+2]
+    mov AX, [idt+2]
     CALL display_int
-    mov rax, [idt]
+    mov AX, [idt]
     CALL display_int
 
 ;--------------TR-----------------
     print tcon,tconlen
-    mov rax, [tr]
+    mov AX, [tr]
     CALL display_int
 exit
 
@@ -116,7 +116,7 @@ display_int:
     MOV RCX, 4                                ; how many times should we loop?(digit count)
 
     over_all_digits:
-        ROL RAX, 4H                           ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
+        ROL AX, 4H                           ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
