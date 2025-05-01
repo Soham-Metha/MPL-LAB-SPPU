@@ -131,10 +131,10 @@ hex_to_bcd:
     RET
 
 bcd_to_hex:
-    MOV     BX,    10
+    MOV     EBX,    10
     MOV     ECX,    [inputLen]
 .num_loop:
-    MUL    EAX,    BX
+    MUL    EBX
     MOV     DL,     [ESI]
     SUB     DL,     '0'
     ADD     EAX,    EDX
