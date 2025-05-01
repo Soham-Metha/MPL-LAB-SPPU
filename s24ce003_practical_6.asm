@@ -64,7 +64,7 @@ b2hHandler:
     CALL display_quad
 
 get_bin_word:
-    XOR RAX, RAX
+    MOV RAX, 0
     MOV RSI, input
     MOV RCX, 4                                ; how many times should we loop?(digit count)
 
