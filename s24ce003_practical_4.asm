@@ -2,6 +2,7 @@
 
 section .data
 menu_msg:
+    db  0x0A
     db  "1. Addition        ",0x0A
     db  "2. Subtraction     ",0x0A
     db  "3. Multiplication  ",0x0A
