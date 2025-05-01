@@ -24,10 +24,10 @@ section .text
 _start:
     print   msg1,  msg1_len
     read    strin, 100H
-    print   msg2,  msg2_len
 
     DEC     RAX
-    CALL display_int
+    print   msg2,  msg2_len
+    CALL    display_int
 
 exit
 
