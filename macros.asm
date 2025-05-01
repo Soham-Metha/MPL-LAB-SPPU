@@ -36,7 +36,12 @@
 %endmacro
 
 section .data
-    crlf              db  0x0A                                                                   ; ASCII for new line
+    crlf:
+        db  0x0A                                                                   ; ASCII for new line
+
+section .bss
+    buffer:
+        resb 10H
 
 section .text
     global _start
