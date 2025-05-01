@@ -18,7 +18,7 @@ section .data
         db "No of occurrences:"
     charOccurMsgLen equ $-charOccurMsg
 
-    count: db 0
+    count: dq 0
 
 section .bss
     pbuffer resb 10H
