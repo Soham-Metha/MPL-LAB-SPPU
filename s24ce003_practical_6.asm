@@ -60,16 +60,16 @@ end:
 
 h2bHandler:
 b2hHandler:
-    CALL get_bin_word
-    CALL display_quad
+    CALL ascii_hex_to_hex
+    CALL hex_to_ascii_hex
 
-get_bin_word:
+ascii_hex_to_hex:
     MOV RAX, 0
     MOV RSI, input
     MOV RCX, 4                                ; how many times should we loop?(digit count)
 
     over_all_digits2:
-        ROL RAX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
+        ROL AX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         MOV BL, [RSI]
 
         CMP BL, '9'
@@ -84,7 +84,7 @@ get_bin_word:
 
 RET
 
-display_quad:
+hex_to_ascii_hex:
     MOV RDI, buffer                           ; destination for the ASCII values
     MOV RCX, 10H                              ; how many times should we loop?
 
