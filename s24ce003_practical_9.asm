@@ -89,7 +89,7 @@ opened_successfully:
     call occ
 
     print charOccurMsg,charOccurMsgLen
-    MOV RAX,chacount
+    MOV RAX,[chacount]
     CALL display_quad
     
 exit
