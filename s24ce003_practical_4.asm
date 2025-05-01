@@ -30,12 +30,12 @@ section .text
 
 menustart:
     CALL    display_int
-    read    buffer, 10H
+    ;read    buffer, 10H
     MOV qword[buffer], 0
 _start:
 
     print   menu_msg, menu_msg_len
-    read    choice,   1
+    read    choice,   2
 
     CMP byte[choice], '7'
     JGE end
