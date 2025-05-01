@@ -81,6 +81,10 @@ proc_mode:
 ;-------------GDT----------------
     SGDT    [gdt]
     print   gcon,   gconlen
+    MOV     AX,     [gdt+8]
+    CALL    display_int
+    MOV     AX,     [gdt+6]
+    CALL    display_int
     MOV     AX,     [gdt+4]
     CALL    display_int
     MOV     AX,     [gdt+2]
