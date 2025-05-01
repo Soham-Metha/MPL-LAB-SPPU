@@ -1,7 +1,8 @@
 %include 'macros.asm'
 
 section .data
-    fname db 'text.txt',0
+    fname:
+        db 'text.txt',0
 
     openedMsg:
         db "File opened successfully",0x0A
