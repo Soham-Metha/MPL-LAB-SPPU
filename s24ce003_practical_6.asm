@@ -94,7 +94,6 @@ hex_to_ascii_hex:
     MOV RCX, 4                              ; how many times should we loop?
 
     over_all_digits:
-        ROL AX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         MOV BL, AL
 
         CMP BL, 09H
@@ -104,6 +103,7 @@ hex_to_ascii_hex:
         not_alphabet:
             ADD BL, '0'
             MOV [RDI], BL
+            ROL AX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
             DEC RDI
     LOOP over_all_digits
 RET
