@@ -44,12 +44,10 @@ section .data
 section .bss
     gdt:
         gdtlimit: resb 2
-        gdtbasel: resb 2
-        gdtbaseu: resb 2
+        gdtbase:  resb 4
     idt:
         idtlimit: resb 2
-        idtbasel: resb 2
-        idtbaseu: resb 2
+        idtbase:  resb 4
     ldt:
         resb 2
     tr:
