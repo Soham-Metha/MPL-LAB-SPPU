@@ -6,7 +6,7 @@ clear &&
 #build object file
 nasm -f elf64 $prefix$1.asm &&
 
-if [[ $1 == '9' ]]; then
+if [[ $1 -eq 9 ]]; then
     nasm -f elf64 s24ce003_practical_9helper.asm &&
     ld -o s24ce003_practical_9.out s24ce003_practical_9.o s24ce003_practical_9helper.o ;
 else
