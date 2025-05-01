@@ -74,48 +74,48 @@ proc_mode:
 
 ;-------------CR0----------------
     MOV     AX,     [cr+2]
-    CALL    display_int
+    CALL    display_word
     MOV     AX,     [cr]
-    CALL    display_int
+    CALL    display_word
 
 ;-------------GDT----------------
     SGDT    [gdt]
     print   gcon,   gconlen
     MOV     AX,     [gdt+4]
-    CALL    display_int
+    CALL    display_word
     MOV     AX,     [gdt+2]
-    CALL    display_int
+    CALL    display_word
     print   col,    collen
     MOV     AX,     [gdt]
-    CALL    display_int
+    CALL    display_word
 
 ;-------------IDT----------------
     SIDT    [idt]
     print   icon,   iconlen
     MOV     AX,     [idt+4]
-    CALL    display_int
+    CALL    display_word
     MOV     AX,     [idt+2]
-    CALL    display_int
+    CALL    display_word
     print   col,    collen
     MOV     AX,     [idt]
-    CALL    display_int
+    CALL    display_word
 
 ;-------------LDT----------------
     SLDT    [ldt]
     print   lcon,   lconlen
     MOV     AX,     [ldt]
-    CALL    display_int
+    CALL    display_word
 
 ;--------------TR-----------------
     STR     [tr]
     print   tcon,   tconlen
     MOV     AX,     [tr]
-    CALL    display_int
+    CALL    display_word
 exit
 
-;-----------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------DEFN SECTION-----------------------------------------------------------------
 
-display_int:
+display_word:
     MOV RDI, buffer                           ; destination for the ASCII values
     MOV RCX, 4                                ; how many times should we loop?(digit count)
 
