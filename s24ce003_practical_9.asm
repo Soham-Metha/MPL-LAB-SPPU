@@ -56,12 +56,12 @@ _start:
     BT rax,63
     jc opened_successfully
 
-    println errorMsg,errorMsgLen
+    print errorMsg,errorMsgLen
     exit
 
 opened_successfully:
 
-    println openedSuccessfullyMsg,openedSuccessfullyMsgLen
+    print openedSuccessfullyMsg,openedSuccessfullyMsgLen
 
     mov rax,0
     mov rdi,[fd]
@@ -71,15 +71,15 @@ opened_successfully:
 
     mov qword[buf_len],rax
 
-    ;println spaceMsg,spaceMsgLen
+    ;print spaceMsg,spaceMsgLen
 
     ;call spaces
 
-    ;println nlMsg,nlMsgLen
+    ;print nlMsg,nlMsgLen
 
     ;call enters
 
-    println charInMsg,charInMsgLen
+    print charInMsg,charInMsgLen
     read cha,2
 
     mov bl, byte[cha]

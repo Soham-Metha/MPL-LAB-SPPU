@@ -22,7 +22,7 @@ occ:
         inc     rsi
         loop    up3
 
-    println charOccurMsg,charOccurMsgLen
+    print charOccurMsg,charOccurMsgLen
     MOV RAX,ncount
     CALL display_int
 ret
