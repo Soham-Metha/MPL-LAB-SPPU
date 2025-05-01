@@ -45,7 +45,7 @@ _start:
 
     print   In_msg,         in_msg_len
     read    input,          6
-    DEC     EAX
+
     MOV     [inputLen],     EAX
     MOV     RAX,            0
 
@@ -60,7 +60,7 @@ _start:
 exit
 
 h2bHanDLer:
-    CMP     dword[inputLen],     4
+    CMP     dword[inputLen],     5
     JNE     invalid
 
     CALL    ascii_hex_to_hex
@@ -69,7 +69,7 @@ h2bHanDLer:
     RET
 
 b2hHanDLer:
-    CMP     dword[inputLen],     5
+    CMP     dword[inputLen],     6
     JNE     invalid
 
     CALL    bcd_to_hex
@@ -82,7 +82,7 @@ invalid:
     exit
 
 ascii_hex_to_hex:
-    MOV     RCX,    [inputLen]                                   ; how many times should we loop?(digit count)
+    MOV     RCX,    4                                   ; how many times should we loop?(digit count)
 
     over_all_digits2:
         ROL AX,     4                                   ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
@@ -120,7 +120,7 @@ RET
 
 hex_to_bcd:
     MOV     EBX,    10
-    MOV     ECX,    [inputLen]
+    MOV     ECX,    5
 .bcd_loop:
     XOR     EDX,    EDX
     DIV     EBX
@@ -132,7 +132,7 @@ hex_to_bcd:
 
 bcd_to_hex:
     MOV     EBX,    10
-    MOV     ECX,    [inputLen]
+    MOV     ECX,    5
 .num_loop:
     IMUL    EBX
     MOV     DL,     [ESI]
