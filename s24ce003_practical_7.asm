@@ -1,5 +1,7 @@
 %include 'macros.asm'
 
+;------------------------------------------------DATA SECTION-----------------------------------------------------------------
+
 section .data
     rmode:
         db 0x0A
@@ -37,19 +39,23 @@ section .data
         db ":"
     collen equ $-col
 
+;------------------------------------------------ BSS SECTION-----------------------------------------------------------------
+
 section .bss
     gdt:
         resb 6
-    ldt:
-        resb 2
     idt:
         resb 6
+    ldt:
+        resb 2
     tr:
         resb 2
     cr:
         resb 10
     buffer:
         resb 4
+
+;------------------------------------------------TEXT SECTION-----------------------------------------------------------------
 
 section .text
 
@@ -91,11 +97,6 @@ proc_mode:
     mov AX, [gdt]
     CALL display_int
 
-;-------------LDT----------------
-    print lcon,lconlen
-    mov AX, [ldt]
-    CALL display_int
-
 ;-------------IDT----------------
     print icon,iconlen
     mov AX, [idt+4]
@@ -105,11 +106,18 @@ proc_mode:
     mov AX, [idt]
     CALL display_int
 
+;-------------LDT----------------
+    print lcon,lconlen
+    mov AX, [ldt]
+    CALL display_int
+
 ;--------------TR-----------------
     print tcon,tconlen
     mov AX, [tr]
     CALL display_int
 exit
+
+;-----------------------------------------------------------------------------------------------------------------------------
 
 display_int:
     MOV RDI, buffer                           ; destination for the ASCII values
