@@ -39,7 +39,7 @@ section .data
 
 section .bss
     gdt:
-        resb 6
+        resb 10
     ldt:
         resb 2
     idt:
@@ -83,6 +83,8 @@ proc_mode:
 
 ;-------------GDT----------------
     print gcon,gconlen
+    mov AX, [gdt+6]
+    CALL display_int
     mov AX, [gdt+4]
     CALL display_int
     mov AX, [gdt+2]
