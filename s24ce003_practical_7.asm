@@ -60,62 +60,60 @@ section .bss
 section .text
 
 _start:
-    smsw [cr]
-    mov AX,[cr]
-
-    bt AX,1
-    jc proc_mode
-
-    print rmode,rmodelen
+    SMSW            [cr]
+    MOV     AX,     [cr]
+    BT      AX,     1
+    JC      proc_mode
+    print   rmode,  rmodelen
 exit
 
 proc_mode:
 
 ;-------------MODE---------------
-    print pmode,pmodelen
+    print   pmode,  pmodelen
 
 ;-------------CR0----------------
-    mov AX,[cr+2]
-    CALL display_int
+    MOV     AX,     [cr+2]
+    CALL    display_int
 
-    mov AX,[cr]
-    CALL display_int
+    MOV     AX,     [cr]
+    CALL    display_int
 
 ;-----------LOAD ALL-------------
-    sgdt [gdt]
-    sldt [ldt]
-    sidt [idt]
-    str [tr]
+    SGDT    [gdt]
+    SLDT    [ldt]
+    SIDT    [idt]
+    STR     [tr]
 
 ;-------------GDT----------------
-    print gcon,gconlen
-    mov AX, [gdt+4]
-    CALL display_int
-    mov AX, [gdt+2]
-    CALL display_int
-    print col,collen
-    mov AX, [gdt]
-    CALL display_int
+    print   gcon,   gconlen
+    MOV     AX,     [gdt+4]
+    CALL    display_int
+    MOV     AX,     [gdt+2]
+    CALL    display_int
+    print   col,    collen
+    MOV     AX,     [gdt]
+    CALL    display_int
 
 ;-------------IDT----------------
-    print icon,iconlen
-    mov AX, [idt+4]
-    CALL display_int
-    mov AX, [idt+2]
-    CALL display_int
-    print col,collen
-    mov AX, [idt]
-    CALL display_int
+    print   icon,   iconlen
+    MOV     AX,     [idt+4]
+    CALL    display_int
+    MOV     AX,     [idt+2]
+    CALL    display_int
+    print   col,    collen
+    MOV     AX,     [idt]
+    CALL    display_int
 
 ;-------------LDT----------------
-    print lcon,lconlen
-    mov AX, [ldt]
-    CALL display_int
+    print   lcon,   lconlen
+    MOV     AX,     [ldt]
+    CALL    display_int
 
 ;--------------TR-----------------
-    print tcon,tconlen
-    mov AX, [tr]
-    CALL display_int
+    print   tcon,   tconlen
+    MOV     AX,     [tr]
+    CALL    display_int
 exit
 
 ;-----------------------------------------------------------------------------------------------------------------------------
@@ -131,3 +129,10 @@ display_int:
 
     print buffer, 4                           ; print result
 RET
+
+; IN PROTECTED MODE
+; CR0 : 00000033            // Valid Output for CR0 and TR
+; GDT : FFFE0000:0000       // OS doesnt allow us to access the
+; IDT : FFFF0000:0000       // GDT, IDT and LDT, and instead 
+; LDT : FFFF                // gives fake values
+; TR  : 0040                //                  ~ ChatGPT
