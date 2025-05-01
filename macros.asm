@@ -28,22 +28,6 @@
         INC RDI
 %endmacro
 
-%macro printtr 2
-    MOV RBX, %1
-    MOV RCX, %2
-    DEC RCX
-    
-    discard_zeros:
-        CMP byte[RBX], '0'
-        JNZ break_out_of_loop
-        INC RBX
-    LOOP discard_zeros
-
-    break_out_of_loop:
-        ADD RCX, 1H
-        println RBX, RCX
-%endmacro
-
 %macro exit 0
     print   crlf,1
     MOV RAX, 3CH
@@ -52,10 +36,7 @@
 %endmacro
 
 section .data
-    crlf              db  '',10                                                                   ;10 is the ASCII for new line
-    qword_digit_count dq  10H
-    dash_break        db  "---------------------------------------------------------------------"
-    dash_break_len    equ $-dash_break
+    crlf              db  0x0A                                                                   ; ASCII for new line
 
 section .text
     global _start
