@@ -60,9 +60,11 @@ end:
     exit
 
 h2bHandler:
-b2hHandler:
     CALL ascii_hex_to_hex
     CALL hex_to_bcd
+b2hHandler:
+    CALL bcd_to_hex
+    CALL hex_to_ascii_hex
 
 ascii_hex_to_hex:
     MOV RAX, 0
@@ -87,7 +89,7 @@ RET
 
 hex_to_ascii_hex:
     MOV RDI, buffer                           ; destination for the ASCII values
-    MOV RCX, 10H                              ; how many times should we loop?
+    MOV RCX, 4                              ; how many times should we loop?
 
     over_all_digits:
         ROL RAX, 4H                           ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
@@ -107,4 +109,18 @@ hex_to_bcd:
     mov [edi], dl
     dec edi
     loop .bcd_loop
+    ret
+
+bcd_to_hex:
+    xor eax, eax
+    mov ecx, 5
+    mov esi, input
+    mov ebx, 10
+.num_loop:
+    imul eax, ebx
+    mov dl, [esi]
+    sub dl, '0'
+    add eax, edx
+    inc esi
+    loop .num_loop
     ret
