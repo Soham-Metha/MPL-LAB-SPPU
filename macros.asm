@@ -45,6 +45,7 @@
 %endmacro
 
 %macro exit 0
+    print   crlf,1
     MOV RAX, 3CH
     MOV RDI, 00H
     syscall
