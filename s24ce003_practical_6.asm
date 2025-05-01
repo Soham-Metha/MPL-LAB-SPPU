@@ -68,14 +68,14 @@ h2bHanDLer:
     CMP     dword[inputLen],     5
     JNE     invalid
     CALL    ascii_hex_to_hex
-    MOV     EDI,    buffer+4
+    MOV     EDI,    buffer+7
     CALL    hex_to_bcd
     RET
 b2hHanDLer:
     CMP     dword[inputLen],     6
     JNE     invalid
     CALL    bcd_to_hex
-    MOV     EDI,    buffer+3                            ; destination for the ASCII values
+    MOV     EDI,    buffer+7                            ; destination for the ASCII values
     CALL    hex_to_ascii_hex
     RET
 
