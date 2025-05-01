@@ -26,9 +26,9 @@ section .data
     cnt:
         db 05H
     pos_cnt:
-        db 05H
+        dq 05H
     neg_cnt:
-        db 00H
+        dq 00H
 
 
 ;------------------------------------------------ BSS SECTION-----------------------------------------------------------------
@@ -70,17 +70,17 @@ exit
 ;------------------------------------------------DEFN SECTION-----------------------------------------------------------------
 
 get_count:
-    MOV RCX, 5H
+    MOV CL, 5H
 
     compare_all_numbers:
         CMP qword[RBP], 0H
         JG  continue            ; jmp if no. is positive
-        DEC byte[pos_cnt]
+        DEC qword[pos_cnt]
 
         CMP qword[RBP], 0H
         JE  continue            ; jmp if no. is 0
 
-        INC byte[neg_cnt]
+        INC qword[neg_cnt]
 
     continue:
         ADD RBP, 08H
