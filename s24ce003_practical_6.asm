@@ -1,4 +1,4 @@
-%include 'macros.asm'
+%INClude 'macros.asm'
 
 section .data
 
@@ -27,110 +27,106 @@ section .bss
         resb 3
     input:
         resb 6
-    output:
-        resb 6
     buffer:
         resb 8
 
 section .text
 
 menustart:
-    print   buffer, 8                         ; print result
+    print   buffer, 8                               ; print result
 _start:
-    print menu_msg,menu_msg_len
-    read choice, 2
+    print   menu_msg,       menu_msg_len
+    read    choice,         2
 
-    CMP byte[choice], '3'                           ; user has only 2 options, 1 & 2
-    JGE end                                         ; if user enters some other option, exit
+    CMP     byte[choice],   '3'                           ; user has only 2 options, 1 & 2
+    JGE     end                                         ; if user enters some other option, exit
 
-    CMP byte[choice], '0'                           ; 0 is not a valid choice
-    JE  end
+    CMP     byte[choice],   '0'                           ; 0 is not a valid choice
+    JE      end
 
-    print In_msg, in_msg_len
-    read input, 6
+    print   In_msg,         in_msg_len
+    read    input,          6
 
-    PUSH menustart                                  ; ret returns to the address at top of stack
+    PUSH    menustart                                  ; RET RETurns to the ADDress at top of stack
+    MOV     RAX,    0
+    MOV     ESI,    input
 
-    cmp byte[choice], '1'
-    jz  h2bHandler
+    cmp     byte[choice],   '1'
+    jz      h2bHanDLer
 
-    cmp byte[choice], '2'
-    jz  b2hHandler
+    cmp     byte[choice],   '2'
+    jz      b2hHanDLer
 end:
     exit
 
-h2bHandler:
-    CALL ascii_hex_to_hex
-    CALL hex_to_bcd
+h2bHanDLer:
+    CALL    ascii_hex_to_hex
+    MOV     EDI,    buffer+4
+    CALL    hex_to_bcd
     RET
-b2hHandler:
-    CALL bcd_to_hex
-    CALL hex_to_ascii_hex
+b2hHanDLer:
+    CALL    bcd_to_hex
+    MOV     EDI,    buffer+3                            ; destination for the ASCII values
+    CALL    hex_to_ascii_hex
     RET
 
 ascii_hex_to_hex:
-    MOV RAX, 0
-    MOV RSI, input
-    MOV RCX, 4                                ; how many times should we loop?(digit count)
+    MOV     RCX,    4                                   ; how many times should we loop?(digit count)
 
     over_all_digits2:
-        ROL AX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
-        MOV BL, [RSI]
+        ROL AX,     4                                   ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
+        MOV BL,     [ESI]
 
-        CMP BL, '9'
+        CMP BL,     '9'
         JBE not_alphabet2
-        SUB BL, 07H
+        SUB BL,     07H
 
-        not_alphabet2:
-            SUB BL, '0'
-            OR  AL, BL
-            INC RSI
+    not_alphabet2:
+        SUB BL,     '0'
+        OR  AL,     BL
+        INC ESI
     LOOP over_all_digits2
 
 RET
 
 hex_to_ascii_hex:
-    MOV RDI, buffer+3                           ; destination for the ASCII values
-    MOV RCX, 4                                  ; how many times should we loop?
+    MOV     RCX,    4                                   ; how many times should we loop?(digit count)
 
     over_all_digits:
-        MOV BL, AL
-        AND BL, 0FH
-        CMP BL, 09H
+        MOV BL,     AL
+        AND BL,     0FH
+        CMP BL,     09H
         JBE not_alphabet
-        ADD BL, 07H
+        ADD BL,     07H
 
-        not_alphabet:
-            ADD BL, '0'
-            MOV [RDI], BL
-            ROL AX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
-            DEC RDI
+    not_alphabet:
+        ADD BL,     '0'
+        MOV [EDI],  BL
+        DEC EDI
+        ROL AX,     4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
     LOOP over_all_digits
 RET
 
 hex_to_bcd:
-    mov ebx, 10
-    mov ecx, 5
-    mov edi, buffer+4
+    MOV     EBX,    10
+    MOV     ECX,    5
 .bcd_loop:
-    xor edx, edx
-    div ebx
-    add dl, '0'
-    mov [edi], dl
-    dec edi
-    loop .bcd_loop
-    ret
+    XOR     EDX,    EDX
+    DIV     EBX
+    ADD     DL,     '0'
+    MOV     [EDI],  DL
+    DEC     EDI
+    LOOP    .bcd_loop
+    RET
 
 bcd_to_hex:
-    xor eax, eax
-    mov ecx, 5
-    mov esi, input
-    mov ebx, 10
+    MOV     EBX,    10
+    MOV     ECX,    5
 .num_loop:
-    imul eax, ebx
-    mov dl, [esi]
-    sub dl, '0'
-    add eax, edx
-    inc esi
-    loop .num_loop
-    ret
+    IMUL    EBX
+    MOV     DL,     [ESI]
+    SUB     DL,     '0'
+    ADD     EAX,    EDX
+    INC     ESI
+    LOOP    .num_loop
+    RET
