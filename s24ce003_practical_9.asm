@@ -84,7 +84,7 @@ opened_successfully:
     ;print charInMsg,charInMsgLen
     ;read cha,2
 
-    mov bl, ' '
+    mov bl, 'l'
 
     call occ
 
