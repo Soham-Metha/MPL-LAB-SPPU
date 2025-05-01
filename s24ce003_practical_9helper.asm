@@ -5,17 +5,17 @@ section .data
 
     spaceMsg:
         db 0x0A
-        db "Spaces:"
+        db "Spaces :            "
     spaceMsgLen equ $-spaceMsg
 
     nlMsg:
         db 0x0A
-        db "NewLines:"
+        db "NewLines :          "
     nlMsgLen equ $-nlMsg
 
     charOccurMsg:
         db 0x0A
-        db "No of occurrences:"
+        db "No of occurrences : "
     charOccurMsgLen equ $-charOccurMsg
 
     count: dw 0
