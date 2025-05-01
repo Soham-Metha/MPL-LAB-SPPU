@@ -98,7 +98,7 @@ RET
 
 hex_to_bcd:
     mov ebx, 10
-    mov ecx, 5
+    mov ecx, 10H
     mov edi, buffer+0FH
 .bcd_loop:
     xor edx, edx
