@@ -91,7 +91,7 @@ RET
 
 hex_to_ascii_hex:
     MOV RDI, buffer+3                           ; destination for the ASCII values
-    MOV RCX, 4                              ; how many times should we loop?
+    MOV RCX, 4                                  ; how many times should we loop?
 
     over_all_digits:
         MOV BL, AL
