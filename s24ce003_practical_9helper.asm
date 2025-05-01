@@ -36,5 +36,5 @@ display_int:
         hex_ascii_adjust                       ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
-    printtr pbuffer, 2                         ; trim the leading '0's from buffer, and print result
+    print pbuffer, 2                         ; trim the leading '0's from buffer, and print result
 RET
