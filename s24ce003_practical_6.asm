@@ -77,7 +77,7 @@ get_bin_word:
         SUB BL, 07H
 
         not_alphabet2:
-            SUB BL, 30H
+            SUB BL, '0'
             OR  AL, BL
             INC RSI
     LOOP over_all_digits2
