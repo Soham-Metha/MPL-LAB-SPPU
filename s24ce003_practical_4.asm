@@ -29,7 +29,7 @@ section .data
 
 section .bss
 
-    choice resb 01H
+    choice resb 02H
     buffer resb 10H
 
 ;------------------------------------------------TEXT SECTION-----------------------------------------------------------------
