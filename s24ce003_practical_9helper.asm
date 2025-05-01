@@ -25,16 +25,18 @@ spaces:
     print spaceMsg,spaceMsgLen
     mov bl,' '
     CALL occr
-
+    MOV  byte[count],0
 enters:
     print nlMsg,nlMsgLen
     mov bl,0x0A
     CALL occr
+    MOV  byte[count],0
 
 char:
     print charOccurMsg,charOccurMsgLen
     mov bl,byte[cha]
     CALL occr
+    MOV  byte[count],0
 
 occr:
     print buffer,buf_len
