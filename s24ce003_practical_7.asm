@@ -50,7 +50,7 @@ proc_mode:
 
     mov rax,[cr]
     CALL display_int
-    print 10,1
+    print crlf,1
 
 ;-----------LOAD ALL-------------
     sgdt [gdt]
@@ -67,13 +67,13 @@ proc_mode:
     print col,collen
     mov rax, [gdt]
     CALL display_int
-    print 10,1
+    print crlf,1
 
 ;-------------LDT----------------
     print lcon,lconlen
     mov rax, [ldt]
     CALL display_int
-    print 10,1
+    print crlf,1
 
 ;-------------IDT----------------
     print icon,iconlen
@@ -83,13 +83,13 @@ proc_mode:
     CALL display_int
     mov rax, [idt]
     CALL display_int
-    print 10,1
+    print crlf,1
 
 ;-----------_--TR--------_--------
     print tcon,tconlen
     mov rax, [tr]
     CALL display_int
-    print 10,1
+    print crlf,1
 exit
 
 display_int:
