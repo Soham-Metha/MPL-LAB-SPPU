@@ -35,7 +35,7 @@ section .bss
 section .text
 
 menustart:
-    print output,4
+    print output,5
 _start:
     print menu_msg,menu_msg_len
     read choice, 2
