@@ -8,7 +8,7 @@ nasm -f elf64 $prefix$1.asm &&
 
 if [[ $1 == 9 ]]; then
     nasm -f elf64 s24ce003_practical_9helper.asm &&
-    ld -o $prefix$1.out s24ce003_practical_9.o s24ce003_practical_9helper.o ;
+    ld -o s24ce003_practical_9.out s24ce003_practical_9.o s24ce003_practical_9helper.o ;
 else
     ld $prefix$1.o -o $prefix$1.out;
 fi
