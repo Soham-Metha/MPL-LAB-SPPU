@@ -132,7 +132,7 @@ hex_to_bcd:
 
 bcd_to_hex:
     MOV     EBX,    10
-    MOV     ECX,    4
+    MOV     ECX,    [inputLen]
 .num_loop:
     IMUL    EBX
     MOV     DL,     [ESI]
