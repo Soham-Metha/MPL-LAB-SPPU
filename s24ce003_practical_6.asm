@@ -43,16 +43,12 @@ _start:
     print   menu_msg,       menu_msg_len
     read    choice,         2
 
-    CMP     byte[choice],   '3'                           ; user has only 2 options, 1 & 2
-    JGE     end                                         ; if user enters some other option, exit
-
-    CMP     byte[choice],   '0'                           ; 0 is not a valid choice
-    JE      end
-
     print   In_msg,         in_msg_len
     read    input,          6
+
     MOV     [inputLen],     EAX
     MOV     RAX,            0
+
     PUSH    menustart                                  ; RET RETurns to the ADDress at top of stack
     MOV     ESI,    input
 
@@ -61,19 +57,21 @@ _start:
 
     cmp     byte[choice],   '2'
     jz      b2hHanDLer
-end:
-    exit
+exit
 
 h2bHanDLer:
     CMP     dword[inputLen],     5
     JNE     invalid
+
     CALL    ascii_hex_to_hex
-    MOV     EDI,    buffer+7
+    MOV     EDI,    buffer+7                            ; destination for the ASCII values
     CALL    hex_to_bcd
     RET
+
 b2hHanDLer:
     CMP     dword[inputLen],     6
     JNE     invalid
+
     CALL    bcd_to_hex
     MOV     EDI,    buffer+7                            ; destination for the ASCII values
     CALL    hex_to_ascii_hex
@@ -84,7 +82,7 @@ invalid:
     exit
 
 ascii_hex_to_hex:
-    MOV     RCX,    4                                   ; how many times should we loop?(digit count)
+    MOV     RCX,    [inputLen]-1                                   ; how many times should we loop?(digit count)
 
     over_all_digits2:
         ROL AX,     4                                   ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
@@ -103,7 +101,7 @@ ascii_hex_to_hex:
 RET
 
 hex_to_ascii_hex:
-    MOV     RCX,    4                                   ; how many times should we loop?(digit count)
+    MOV     RCX,    [inputLen]-1                                   ; how many times should we loop?(digit count)
 
     over_all_digits:
         MOV BL,     AL
@@ -122,7 +120,7 @@ RET
 
 hex_to_bcd:
     MOV     EBX,    10
-    MOV     ECX,    5
+    MOV     ECX,    [inputLen]-1
 .bcd_loop:
     XOR     EDX,    EDX
     DIV     EBX
@@ -134,7 +132,7 @@ hex_to_bcd:
 
 bcd_to_hex:
     MOV     EBX,    10
-    MOV     ECX,    5
+    MOV     ECX,    [inputLen]-1
 .num_loop:
     IMUL    EBX
     MOV     DL,     [ESI]
