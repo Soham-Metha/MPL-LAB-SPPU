@@ -44,11 +44,11 @@ section .data
 section .bss
     gdtlimit:       ; 2 bytes
         resw 1
-    gdt:            ; 4 bytes
+    gdtbase:        ; 4 bytes
         resd 1      ; resd for a 32 bit pc, resq for 64 bit pc
     idtlimit:       ; 2 bytes
         resw 1
-    idt:            ; 4 bytes
+    idtbase:        ; 4 bytes
         resd 1      ; resd for a 32 bit pc, resq for 64 bit pc
     ldt:            ; 2 bytes
         resw 1
@@ -90,9 +90,9 @@ proc_mode:
 
 ;-------------GDT----------------
     print   gcon,   gconlen
-    MOV     AX,     [gdt+2]
+    MOV     AX,     [gdtbase+2]
     CALL    display_word
-    MOV     AX,     [gdt]
+    MOV     AX,     [gdtbase]
     CALL    display_word
     print   col,    collen
     MOV     AX,     [gdtlimit]
@@ -100,9 +100,9 @@ proc_mode:
 
 ;-------------IDT----------------
     print   icon,   iconlen
-    MOV     AX,     [idt+2]
+    MOV     AX,     [idtbase+2]
     CALL    display_word
-    MOV     AX,     [idt]
+    MOV     AX,     [idtbase]
     CALL    display_word
     print   col,    collen
     MOV     AX,     [idtlimit]
