@@ -15,10 +15,10 @@ section .bss
     global buf_len,buffer,cha
 
     fd      resb 17
+    cha     resb 2
     buffer  resb 200
     buf_len resb 16
 
-    cha     resb 2
 
 
 section .text
