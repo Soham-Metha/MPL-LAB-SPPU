@@ -61,7 +61,7 @@ occr:
 ret
 
 display_quad:
-    MOV RDI, buffer                           ; destination for the ASCII values
+    MOV RDI, pbuffer                           ; destination for the ASCII values
     MOV RCX, 10H                              ; how many times should we loop?
 
     over_all_digits:
@@ -69,5 +69,5 @@ display_quad:
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
-    print buffer, 10H                         ; print result
+    print pbuffer, 10H                         ; print result
 RET
