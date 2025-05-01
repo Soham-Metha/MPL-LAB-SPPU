@@ -35,13 +35,13 @@ _start:
     bt rax,1
     jc proc_mode    
 
-    println rmode,rmodelen
+    print rmode,rmodelen
 exit
 
 proc_mode:
 
 ;-------------MODE---------------
-    println pmode,pmodelen
+    print pmode,pmodelen
 
 ;-------------CR0----------------
     print cro,crolen
@@ -50,7 +50,7 @@ proc_mode:
 
     mov rax,[cr]
     CALL display_int
-    println 10,1
+    print 10,1
 
 ;-----------LOAD ALL-------------
     sgdt [gdt]
@@ -67,13 +67,13 @@ proc_mode:
     print col,collen
     mov rax, [gdt]
     CALL display_int
-    println 10,1
+    print 10,1
 
 ;-------------LDT----------------
     print lcon,lconlen
     mov rax, [ldt]
     CALL display_int
-    println 10,1
+    print 10,1
 
 ;-------------IDT----------------
     print icon,iconlen
@@ -83,13 +83,13 @@ proc_mode:
     CALL display_int
     mov rax, [idt]
     CALL display_int
-    println 10,1
+    print 10,1
 
 ;-----------_--TR--------_--------
     print tcon,tconlen
     mov rax, [tr]
     CALL display_int
-    println 10,1
+    print 10,1
 exit
 
 display_int:
