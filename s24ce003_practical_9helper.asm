@@ -3,13 +3,19 @@
 section .data
     extern charOccurMsg,charOccurMsgLen
 
-    spaceMsg db "Spaces:"
+    spaceMsg:
+        db 0x0A
+        db "Spaces:"
     spaceMsgLen equ $-spaceMsg
 
-    nlMsg db "NewLines:"
+    nlMsg:
+        db 0x0A
+        db "NewLines:"
     nlMsgLen equ $-nlMsg
 
-    charOccurMsg db "No of occurrences:"
+    charOccurMsg:
+        db 0x0A
+        db "No of occurrences:"
     charOccurMsgLen equ $-charOccurMsg
 
     count: db 0
