@@ -73,7 +73,7 @@ get_bin_word:
         MOV BL, [RSI]
 
         CMP BL, '9'
-        JLE not_alphabet2
+        JBE not_alphabet2
         SUB BL, 07H
 
         not_alphabet2:
