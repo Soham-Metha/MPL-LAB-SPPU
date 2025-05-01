@@ -39,15 +39,15 @@ section .data
 
 section .bss
     gdt:
-        resq 3
+        resq 10
     ldt:
-        resq 1
+        resq 10
     idt:
-        resq 3
+        resq 10
     tr:
-        resq 1
+        resq 10
     cr:
-        resq 2
+        resq 10
     buffer:
         resb 4
 
