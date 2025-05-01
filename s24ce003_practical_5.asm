@@ -90,7 +90,7 @@ get_count:
         LOOP compare_all_numbers
 RET
 
-display_int:
+display_quad:
     MOV RDI, buffer                           ; destination for the ASCII values
     MOV RCX, 10H                              ; how many times should we loop?
 
@@ -99,5 +99,5 @@ display_int:
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
-    print buffer, 10H                         ; print result
+    print   buffer, 10H                         ; print result
 RET
