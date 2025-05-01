@@ -71,7 +71,6 @@ get_bin_word:
     over_all_digits2:
         ROL RAX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         MOV BL, [RSI]
-        AND BL, 0FH
 
         CMP BL, 09H
         JLE not_alphabet2
