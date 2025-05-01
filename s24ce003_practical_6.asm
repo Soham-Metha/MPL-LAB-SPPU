@@ -69,7 +69,7 @@ get_bin_word:
     MOV RCX, 4                                ; how many times should we loop?(digit count)
 
     over_all_digits2:
-        SHL RAX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
+        ROL RAX, 4                             ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
         MOV BL, [RSI]
         AND BL, 0FH
 
