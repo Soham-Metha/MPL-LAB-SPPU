@@ -59,7 +59,7 @@ exit
 
 find_largest:
     MOV RBX, [RBP]
-    MOV CX,  5H
+    MOV CL,  5H
 
     compare_all_numbers:
         CMP RBX, [RBP]
