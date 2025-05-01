@@ -24,7 +24,7 @@ section .data
 section .bss
 
     choice:
-        resb 2
+        resb 3
     input:
         resb 6
     output:
