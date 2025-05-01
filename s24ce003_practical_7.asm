@@ -41,7 +41,7 @@ section .bss
     gdt:
         resb 6
     ldt:
-        resb 10
+        resb 2
     idt:
         resb 10
     tr:
