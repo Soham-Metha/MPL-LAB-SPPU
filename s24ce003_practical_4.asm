@@ -37,7 +37,7 @@ section .bss
 section .text
 
 menustart:
-    CALL    display_int                             ; prints result stored in AX
+    CALL    display_quad                             ; prints result stored in AX
 _start:
 
     print   menu_msg, menu_msg_len                  ; print menu
@@ -107,7 +107,9 @@ shrHandler:
     SHR RAX, 1
 RET
 
-display_int:
+;------------------------------------------------DEFN SECTION-----------------------------------------------------------------
+
+display_quad:
     MOV RDI, buffer                           ; destination for the ASCII values
     MOV RCX, 10H                              ; how many times should we loop?
 
@@ -116,5 +118,5 @@ display_int:
         hex_ascii_adjust                      ; macro for hex ascii adjust of AL
     LOOP over_all_digits
 
-    print buffer, 10H                         ; print result
+    print   buffer, 10H                         ; print result
 RET
