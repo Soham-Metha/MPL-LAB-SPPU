@@ -12,25 +12,11 @@ section .data
     errorMsg db "Error in opening file"
     errorMsgLen equ $-errorMsg
 
-    spaceMsg db "Spaces:"
-    spaceMsgLen equ $-spaceMsg
-
-    nlMsg db "NewLines:"
-    nlMsgLen equ $-nlMsg
-
     charInMsg db "Enter character"
     charInMsgLen equ $-charInMsg
 
-    charOccurMsg db "No of occurrences:"
-    charOccurMsgLen equ $-charOccurMsg
-
-    scount dq 0
-    ncount dq 0
-    ccount dq 0
-    chacount dq 0
-
 section .bss
-    global buf_len,buffer,scount,ncount,ccount,chacount,charOccurMsg,charOccurMsgLen
+    global buf_len,buffer,cha
 
     fd      resb 17
     buffer  resb 200
@@ -40,10 +26,9 @@ section .bss
 
 
 section .text
-    extern occ
+    extern spaces,enters,char
 
 _start:
-
 
     mov rax,2
     mov rdi,fname
@@ -56,7 +41,6 @@ _start:
     BT rax,63
     jnc opened_successfully
 
-    CALL display_quad
     print errorMsg,errorMsgLen
     exit
 
@@ -72,34 +56,11 @@ opened_successfully:
 
     mov qword[buf_len],rax
 
-    ;print spaceMsg,spaceMsgLen
+    print charInMsg,charInMsgLen
+    read cha,2
 
-    ;call spaces
-
-    ;print nlMsg,nlMsgLen
-
-    ;call enters
-
-    ;print charInMsg,charInMsgLen
-    ;read cha,2
-
-    mov bl, 'l'
-    call occ
-
-    print charOccurMsg,charOccurMsgLen
-    MOV RAX,[chacount]
-    CALL display_quad
+    call spaces
+    call enters
+    call char
     
 exit
-
-display_quad:
-    MOV RDI, buffer                           ; destination for the ASCII values
-    MOV RCX, 10H                              ; how many times should we loop?
-
-    over_all_digits:
-        ROL RAX, 4H                           ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
-        hex_ascii_adjust                      ; macro for hex ascii adjust of AL
-    LOOP over_all_digits
-
-    print   buffer, 10H                         ; print result
-RET
