@@ -84,7 +84,7 @@ opened_successfully:
 
     mov bl, byte[cha]
 
-    ;call occ
+    call occ
 
 exit
 
