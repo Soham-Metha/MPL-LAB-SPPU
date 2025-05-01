@@ -122,7 +122,7 @@ hex_to_bcd:
     MOV     ECX,    [inputLen]
 .bcd_loop:
     XOR     EDX,    EDX
-    DIV     10
+    DIV     EAX,    10
     ADD     DL,     '0'
     MOV     [EDI],  DL
     DEC     EDI
@@ -132,7 +132,7 @@ hex_to_bcd:
 bcd_to_hex:
     MOV     ECX,    [inputLen]
 .num_loop:
-    MUL    10
+    MUL     EAX,    10
     MOV     DL,     [ESI]
     SUB     DL,     '0'
     ADD     EAX,    EDX
