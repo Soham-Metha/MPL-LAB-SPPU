@@ -46,9 +46,8 @@ _start:
 
     print   In_msg,         in_msg_len
     read    input,          6
-
+    MOV     RCX,            RAX
     PUSH    menustart                                  ; RET RETurns to the ADDress at top of stack
-    MOV     RAX,    0
     MOV     ESI,    input
 
     cmp     byte[choice],   '1'
@@ -71,7 +70,6 @@ b2hHanDLer:
     RET
 
 ascii_hex_to_hex:
-    MOV     RCX,    4                                   ; how many times should we loop?(digit count)
 
     over_all_digits2:
         ROL AX,     4                                   ; rotate the number by 4 bits so that the 'next MSB' is loaded into AL
@@ -121,7 +119,6 @@ hex_to_bcd:
 
 bcd_to_hex:
     MOV     EBX,    10
-    MOV     ECX,    5
 .num_loop:
     IMUL    EBX
     MOV     DL,     [ESI]
