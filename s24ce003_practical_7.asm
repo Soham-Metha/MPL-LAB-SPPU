@@ -1,30 +1,55 @@
 %include 'macros.asm'
 
 section .data
-    rmode db "IN REAL MODE"
+    rmode:
+        db 0x0A
+        db "IN REAL MODE"
     rmodelen equ $-rmode
-    pmode db "IN PROTECTED MODE"
+
+    pmode:
+        db 0x0A
+        db "IN PROTECTED MODE"
+        db 0x0A
+        db "CR0 : "
     pmodelen equ $-pmode
-    gcon db "GDT : "
+
+    gcon:
+        db 0x0A
+        db "GDT : "
     gconlen equ $-gcon
-    lcon db "LDT : "
+    
+    lcon:
+        db 0x0A
+        db "LDT : "
     lconlen equ $-lcon
-    icon db "IDT : "
+    
+    icon:
+        db 0x0A
+        db "IDT : "
     iconlen equ $-icon
-    tcon db "TR : "
+    
+    tcon:
+        db 0x0A
+        db "TR : "
     tconlen equ $-tcon
-    cro db "CR0 : "
-    crolen equ $-cro
-    col db ":"
+    
+    col:
+        db ":"
     collen equ $-col
 
 section .bss
-    gdt resw 3
-    ldt resw 1
-    idt resw 3
-    tr resw 1
-    cr resw 2
-    buffer resb 4
+    gdt:
+        resw 3
+    ldt:
+        resw 1
+    idt:
+        resw 3
+    tr:
+        resw 1
+    cr:
+        resw 2
+    buffer:
+        resb 4
 
 section .text
 
