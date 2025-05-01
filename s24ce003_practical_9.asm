@@ -1,7 +1,7 @@
 %include 'macros.asm'
 
 section .data
-    fname db 'text.txt'
+    fname db 'text.txt',0
 
     openedSuccessfullyMsg db "File opened successfully"
     openedSuccessfullyMsgLen equ $-openedSuccessfullyMsg
