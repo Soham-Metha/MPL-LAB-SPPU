@@ -62,5 +62,5 @@ opened_successfully:
     call spaces
     call enters
     call char
-    
+
 exit

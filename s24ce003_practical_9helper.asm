@@ -39,7 +39,6 @@ char:
     MOV  byte[count],0
 
 occr:
-    print buffer,buf_len
     mov rsi,buffer
     mov RCX,qword[buf_len]
     up3:
