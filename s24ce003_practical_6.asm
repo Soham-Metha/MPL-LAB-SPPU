@@ -134,7 +134,7 @@ bcd_to_hex:
     MOV     EBX,    10
     MOV     ECX,    [inputLen]
 .num_loop:
-    IMUL    EBX
+    IMUL    EAX,    10
     MOV     DL,     [ESI]
     SUB     DL,     '0'
     ADD     EAX,    EDX
