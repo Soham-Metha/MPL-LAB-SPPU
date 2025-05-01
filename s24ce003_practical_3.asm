@@ -54,19 +54,3 @@ _start:
     JNZ print_arr
 
 exit
-
-;------------------------------------------------DEFN SECTION-----------------------------------------------------------------
-
-find_largest:
-    MOV RBX, [RBP]
-    MOV CL,  5H
-
-    compare_all_numbers:
-        CMP RBX, [RBP]
-        JGE continue
-        MOV RBX, [RBP]
-
-    continue:
-        ADD RBP, 08H
-        LOOP compare_all_numbers
-RET
