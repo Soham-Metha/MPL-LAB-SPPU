@@ -4,11 +4,13 @@
 
 section .data
 
-    msg1     db  "Enter String :            "
-    msg1_len equ $-msg1
+    msg1:
+        db  "Enter String :     "
+    msg1_len: equ $-msg1
     
-    msg2     db  "Length of String : "
-    msg2_len equ $-msg2
+    msg2:
+        db  "Length of String : "
+    msg2_len: equ $-msg2
 
 ;------------------------------------------------ BSS SECTION-----------------------------------------------------------------
 
