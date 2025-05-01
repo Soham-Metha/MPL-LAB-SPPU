@@ -42,14 +42,14 @@ section .data
 ;------------------------------------------------ BSS SECTION-----------------------------------------------------------------
 
 section .bss
-    gdtlimit:       ; 2 bytes
-        resw 1
-    gdtbase:        ; 4 bytes
-        resd 1      ; resd for a 32 bit pc, resq for 64 bit pc
-    idtlimit:       ; 2 bytes
-        resw 1
-    idtbase:        ; 4 bytes
-        resd 1      ; resd for a 32 bit pc, resq for 64 bit pc
+    gdt:
+        gdtlimit: resb 2
+        gdtbasel: resb 2
+        gdtbaseu: resb 2
+    idt:
+        idtlimit: resb 2
+        idtbasel: resb 2
+        idtbaseu: resb 2
     ldt:            ; 2 bytes
         resw 1
     tr:             ; 2 bytes
