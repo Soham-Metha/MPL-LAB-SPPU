@@ -51,7 +51,7 @@ section .bss
     tr:
         resb 2
     cr:
-        resb 10
+        resb 4
     buffer:
         resb 4
 
@@ -65,7 +65,7 @@ _start:
     BT      AX,     1
     JC      proc_mode
     print   rmode,  rmodelen
-exit
+    exit
 
 proc_mode:
 
@@ -75,7 +75,6 @@ proc_mode:
 ;-------------CR0----------------
     MOV     AX,     [cr+2]
     CALL    display_int
-
     MOV     AX,     [cr]
     CALL    display_int
 
