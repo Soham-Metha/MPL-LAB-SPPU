@@ -96,6 +96,10 @@ proc_mode:
 ;-------------IDT----------------
     SIDT    [idt]
     print   icon,   iconlen
+    MOV     AX,     [idt+8]
+    CALL    display_int
+    MOV     AX,     [idt+6]
+    CALL    display_int
     MOV     AX,     [idt+4]
     CALL    display_int
     MOV     AX,     [idt+2]
