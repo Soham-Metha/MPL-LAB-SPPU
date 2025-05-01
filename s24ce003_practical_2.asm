@@ -29,7 +29,8 @@ _start:
     print   msg1,  msg1_len
     read    strin, 100H
 
-    PUSH    RAX-1
+    DEC     RAX
+    PUSH    RAX
     print   msg2,  msg2_len
     POP     RAX
     CALL    display_quad
