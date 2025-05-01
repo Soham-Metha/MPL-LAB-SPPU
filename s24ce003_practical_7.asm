@@ -90,12 +90,12 @@ proc_mode:
 
 ;-------------GDT----------------
     print   gcon,   gconlen
-    MOV     AX,     [gdtlimit]
-    CALL    display_word
     MOV     AX,     [gdt+2]
     CALL    display_word
-    print   col,    collen
     MOV     AX,     [gdt]
+    CALL    display_word
+    print   col,    collen
+    MOV     AX,     [gdtlimit]
     CALL    display_word
 
 ;-------------IDT----------------
