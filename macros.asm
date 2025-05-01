@@ -14,20 +14,6 @@
     syscall
 %endmacro
 
-%macro println 2
-    print %1, %2
-    print crlf, 1H
-%endmacro
-
-%macro printbr 0-2
-    println dash_break, dash_break_len
-
-    %if %0 == 2
-        print %1, %2
-    %endif
-
-%endmacro
-
 %macro hex_ascii_adjust 0
     MOV BL, AL
     AND BL, 0FH
@@ -59,7 +45,6 @@
 %endmacro
 
 %macro exit 0
-    printbr
     MOV RAX, 3CH
     MOV RDI, 00H
     syscall
