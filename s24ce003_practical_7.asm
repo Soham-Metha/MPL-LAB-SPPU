@@ -61,8 +61,8 @@ section .text
 
 _start:
     SMSW            [cr]
-    MOV     AX,     CR0
-    BT      AX,     1
+    MOV     EAX,     CR0
+    BT      EAX,     1
     JC      proc_mode
     print   rmode,  rmodelen
     exit
