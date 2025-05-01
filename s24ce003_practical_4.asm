@@ -3,14 +3,14 @@
 section .data
     menu_msg:
         db  0x0A,
-        dw  "-------------------"0x0A
+        db  "-------------------",0x0A
         db  "1. Addition        ",0x0A
         db  "2. Subtraction     ",0x0A
         db  "3. Multiplication  ",0x0A
         db  "4. Division        ",0x0A
         db  "5. Shift left      ",0x0A
         db  "6. Shift right     ",0x0A
-        dw  "-------------------"0x0A
+        db  "-------------------",0x0A
         db  "Enter your choice : "
 
     menu_msg_len: equ $-menu_msg
