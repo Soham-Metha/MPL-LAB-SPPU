@@ -52,6 +52,7 @@ opened_successfully:
     syscall
 
     mov qword[buf_len],rax
+    print buffer,buf_len
     call spaces
     call enters
     call char
