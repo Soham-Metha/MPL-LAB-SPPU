@@ -1,5 +1,7 @@
 %include 'macros.asm'
 
+;------------------------------------------------DATA SECTION-----------------------------------------------------------------
+
 section .data
 
     num1  dq  20H
@@ -23,10 +25,14 @@ section .data
         db  "Result : "
     result_message_len:  equ $-result_message
 
+;------------------------------------------------ BSS SECTION-----------------------------------------------------------------
+
 section .bss
 
     choice resb 01H
     buffer resb 10H
+
+;------------------------------------------------TEXT SECTION-----------------------------------------------------------------
 
 section .text
 
@@ -43,9 +49,9 @@ _start:
     CMP byte[choice], '0'                           ; 0 is not a valid choice
     JE  end
 
-    print result_message, result_message_len
+    print result_message, result_message_len        ; print the "Result : " string
 
-    PUSH menustart
+    PUSH menustart                                  ; ret returns to the address at top of stack
 
     cmp byte[choice], '1'
     jz  addHandler
@@ -67,6 +73,8 @@ _start:
 
 end:
     exit
+
+;-----------------------------------------------------------------------------------------------------------------------------
 
 addHandler:
     MOV RAX, [num1]
