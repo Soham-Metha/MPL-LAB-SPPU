@@ -130,6 +130,6 @@ RET
 ; IN PROTECTED MODE
 ; CR0 : 00000033            // Valid Output for CR0 and TR
 ; GDT : FFFE0000:0000       // OS doesnt allow us to access the
-; IDT : FFFF0000:0000       // GDT, IDT and LDT, and instead 
-; LDT : FFFF                // gives fake values
+; IDT : FFFF0000:0000       // GDT, IDT and (unsure)LDT, and
+; LDT : 0000                // instead gives fake values
 ; TR  : 0040                //                  ~ ChatGPT
