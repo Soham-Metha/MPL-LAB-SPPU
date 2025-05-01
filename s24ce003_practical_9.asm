@@ -56,6 +56,7 @@ _start:
     BT rax,63
     jnc opened_successfully
 
+    CALL display_quad
     print errorMsg,errorMsgLen
     exit
 
@@ -68,7 +69,6 @@ opened_successfully:
     mov rsi,buffer
     mov rdx,200
     syscall
-    CALL display_quad
     mov qword[buf_len],rax
 
     ;print spaceMsg,spaceMsgLen
