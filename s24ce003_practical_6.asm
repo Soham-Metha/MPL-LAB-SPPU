@@ -95,7 +95,7 @@ hex_to_ascii_hex:
 
     over_all_digits:
         MOV BL, AL
-
+        AND BL, 0FH
         CMP BL, 09H
         JBE not_alphabet
         ADD BL, 07H
