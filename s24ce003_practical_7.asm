@@ -50,14 +50,14 @@ section .bss
         idtlimit: resb 2
         idtbasel: resb 2
         idtbaseu: resb 2
-    ldt:            ; 2 bytes
-        resw 1
-    tr:             ; 2 bytes
-        resw 1
-    cr:             ; 4 bytes
-        resd 1
-    buffer:         ; 4 bytes
-        resd 1
+    ldt:
+        resb 2
+    tr:
+        resb 2
+    cr:
+        resb 4
+    buffer:
+        resb 4
 
 ;------------------------------------------------TEXT SECTION-----------------------------------------------------------------
 
@@ -83,8 +83,8 @@ proc_mode:
     CALL    display_word
 
 ;-----------LOAD ALL-------------
-    SGDT    [gdtlimit]
-    SIDT    [idtlimit]
+    SGDT    [gdt]
+    SIDT    [idt]
     SLDT    [ldt]
     STR     [tr]
 
