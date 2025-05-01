@@ -57,5 +57,5 @@ section .data
     dash_break        db  "---------------------------------------------------------------------"
     dash_break_len    equ $-dash_break
 
-section .bss
+section .text
     global _start
