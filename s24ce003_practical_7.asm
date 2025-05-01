@@ -90,7 +90,7 @@ proc_mode:
     CALL    display_int
 
 ;-------------IDT----------------
-    SLDT    [ldt]
+    SIDT    [idt]
     print   icon,   iconlen
     MOV     AX,     [idt+4]
     CALL    display_int
@@ -101,7 +101,7 @@ proc_mode:
     CALL    display_int
 
 ;-------------LDT----------------
-    SIDT    [idt]
+    SLDT    [ldt]
     print   lcon,   lconlen
     MOV     AX,     [ldt]
     CALL    display_int
