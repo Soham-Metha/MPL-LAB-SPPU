@@ -45,7 +45,7 @@ _start:
 
     print   In_msg,         in_msg_len
     read    input,          6
-
+    DEC     EAX
     MOV     [inputLen],     EAX
     MOV     RAX,            0
 
@@ -60,7 +60,7 @@ _start:
 exit
 
 h2bHanDLer:
-    CMP     dword[inputLen],     5
+    CMP     dword[inputLen],     4
     JNE     invalid
 
     CALL    ascii_hex_to_hex
@@ -69,7 +69,7 @@ h2bHanDLer:
     RET
 
 b2hHanDLer:
-    CMP     dword[inputLen],     6
+    CMP     dword[inputLen],     5
     JNE     invalid
 
     CALL    bcd_to_hex
