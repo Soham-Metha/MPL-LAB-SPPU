@@ -14,27 +14,18 @@ section .data
         db 00h
         db 00h
     menu_msg:
-        db  0x0A,0x0A
+        db  0x0A
         db  "-------------------",0x0A
         db "1. W/O STR OPR      ",0x0A
         db "2. W STR OPR        ",0x0A
-        db "3. EXIT             ",0x0A
         db  "-------------------",0x0A
         db "Your Choice : "
     menu_msg_len: equ $-menu_msg
 
-    src_msg:
-        db  0x0A
-        db "SRC : "
-    src_msg_len: equ $-src_msg
-
     dst_msg:
-        db  0x0A
-        db "DST : "
+        db  "        DST :"
     dst_msg_len: equ $-dst_msg
 
-    cnt:
-        db 5
     space:
         db ' '
 
@@ -48,12 +39,6 @@ section .text
 
 _start:
 
-    print   src_msg,        src_msg_len
-    MOV     RBP,            srcblk
-    CALL    printarray
-
-    print   dst_msg,        dst_msg_len
-    MOV     RBP,            dstblk
     CALL    printarray
 
     print   menu_msg,       menu_msg_len
@@ -68,8 +53,6 @@ _start:
     jz      wstr
 
 end:
-    print   dst_msg,        dst_msg_len
-    MOV     RBP,            dstblk
     CALL    printarray
 exit
 
@@ -77,7 +60,7 @@ wostr:
     mov rsi,    srcblk
     mov rdi,    dstblk
     mov rcx,    5
-    
+
     again:
     mov bl,     [rsi]
     mov [rdi],  bl
@@ -96,13 +79,15 @@ wstr:
 ret
 
 printarray:
-    MOV         byte[cnt],  5
+    print   dst_msg,        dst_msg_len
+    MOV     RBP,            dstblk
+    MOV     r15,            5
     print_arr:
         print   space,      1
         MOV     RAX,        [RBP]                 ; load current number in RAX
         CALL    display_byte
         ADD     RBP,        01H
-        DEC     byte[cnt]
+        DEC     r15
     JNZ print_arr
 RET
 
