@@ -53,7 +53,7 @@ section .bss
     tr:
         resb 2
     cr:
-        resb 4
+        resb 2
     buffer:
         resb 4
 
@@ -64,7 +64,7 @@ section .text
 _start:
     SMSW    [cr]
     MOV     AX,     [cr]
-    BT      AX,     1
+    BT      AX,     0
     JC      proc_mode
     print   rmode,  rmodelen
     exit
